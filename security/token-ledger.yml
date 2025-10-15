@@ -24,7 +24,9 @@ tokens:
     score: 1.0
   - timestamp: '2025-10-15T04:47:04.400399'
     score: 1.0
-  last_scored: '2025-10-15T04:47:04.400428'
+  - timestamp: '2025-10-15T23:31:51.200106'
+    score: 1.0
+  last_scored: '2025-10-15T23:31:51.200114'
 - token_id: def456
   owner: user2
   scope: repo, workflow
@@ -50,7 +52,9 @@ tokens:
     score: 0.5
   - timestamp: '2025-10-15T04:47:04.400449'
     score: 0.5
-  last_scored: '2025-10-15T04:47:04.400454'
+  - timestamp: '2025-10-15T23:31:51.200119'
+    score: 0.5
+  last_scored: '2025-10-15T23:31:51.200121'
 - token_id: ghi789
   owner: user3
   scope: admin:org
@@ -76,7 +80,9 @@ tokens:
     score: 1.0
   - timestamp: '2025-10-15T04:47:04.400462'
     score: 1.0
-  last_scored: '2025-10-15T04:47:04.400467'
+  - timestamp: '2025-10-15T23:31:51.200124'
+    score: 1.0
+  last_scored: '2025-10-15T23:31:51.200125'
 - token_id: '52085750'
   owner: HamzaMasood7
   scope: admin:org, repo, workflow, write:packages
@@ -94,4 +100,42 @@ tokens:
   score_history:
   - timestamp: '2025-10-15T04:47:04.400474'
     score: 0.25
-  last_scored: '2025-10-15T04:47:04.400477'
+  - timestamp: '2025-10-15T23:31:51.200128'
+    score: 0.25
+  last_scored: '2025-10-15T23:31:51.200130'
+- token_id: '133033842'
+  owner: hamzaMasood-7
+  scope: read:org, repo
+  usage: GitHub Organization Access
+  issued_on: '2025-10-15'
+  expiry: N/A
+  last_used: '2025-10-15'
+  audit_trail:
+  - org:MYNTIST-IAM
+  - role:member
+  survivability_score: 0.5
+  entity_type: user
+  role: member
+  state: active
+  score_history:
+  - timestamp: '2025-10-15T23:31:51.200133'
+    score: 0.5
+  last_scored: '2025-10-15T23:31:51.200134'
+- token_id: '115296346'
+  owner: Muhammad-Usman-cs
+  scope: read:org, repo
+  usage: GitHub Organization Access
+  issued_on: '2025-10-15'
+  expiry: N/A
+  last_used: '2025-10-15'
+  audit_trail:
+  - org:MYNTIST-IAM
+  - role:member
+  survivability_score: 0.5
+  entity_type: user
+  role: member
+  state: active
+  score_history:
+  - timestamp: '2025-10-15T23:31:51.200137'
+    score: 0.5
+  last_scored: '2025-10-15T23:31:51.200138'
