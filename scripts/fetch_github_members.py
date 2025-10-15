@@ -9,8 +9,8 @@ from datetime import datetime
 load_dotenv()
 
 # Configuration
-GITHUB_ORG_NAME = os.getenv('GITHUB_ORG_NAME')
-GITHUB_PAT_TOKEN = os.getenv('GITHUB_PAT_TOKEN')
+GITHUB_ORG_NAME = os.getenv('ORG_NAME')
+GITHUB_PAT_TOKEN = os.getenv('PAT_TOKEN')
 LEDGER_PATH = Path("security/token-ledger.yml")
 
 # GitHub API headers
@@ -115,7 +115,7 @@ def main():
     """Main function to orchestrate the member fetch and ledger update"""
     
     if not GITHUB_ORG_NAME or not GITHUB_PAT_TOKEN:
-        print("❌ Error: GITHUB_ORG_NAME and GITHUB_PAT_TOKEN must be set in .env file")
+        print("❌ Error: ORG_NAME and PAT_TOKEN must be set in .env file")
         return
     
     print(f"🔍 Fetching members from organization: {GITHUB_ORG_NAME}")

@@ -46,8 +46,8 @@ cp .env_example .env
 Edit `.env` and add your credentials:
 
 ```
-GITHUB_ORG_NAME=MYNTIST-IAM
-GITHUB_PAT_TOKEN=your_github_personal_access_token_here
+ORG_NAME=MYNTIST-IAM
+PAT_TOKEN=your_github_personal_access_token_here
 ```
 
 **Note:** Make sure your GitHub PAT has the following scopes:

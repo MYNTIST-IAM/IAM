@@ -152,9 +152,9 @@ In Phase 2, you'll enhance this to:
 ## Troubleshooting
 
 ### "No members found"
-- Check your `GITHUB_PAT_TOKEN` in `.env`
+- Check your `PAT_TOKEN` in `.env`
 - Ensure your token has `read:org` scope
-- Verify the `GITHUB_ORG_NAME` is correct
+- Verify the `ORG_NAME` is correct
 
 ### "Error fetching role"
 - You need admin access to see member roles

@@ -12,7 +12,7 @@ The survivability scoring bot now runs automatically every 6 hours via GitHub Ac
 ## Schedule
 
 The workflow runs:
-- **Every 6 hours**: 00:00, 06:00, 12:00, 18:00 UTC
+- **Every hour**: At the start of every hour (00:00, 01:00, 02:00, etc.)
 - **Manually**: You can trigger it anytime from GitHub Actions UI
 
 ## Setup Steps
@@ -73,7 +73,7 @@ Test the workflow manually before waiting 6 hours:
 3. Click **"Run workflow"** dropdown
 4. Click **"Run workflow"** button
 
-## What Happens Every 6 Hours
+## What Happens Every Hour
 
 ```
 1. GitHub Actions triggers workflow
@@ -116,8 +116,8 @@ tokens:
 
 ### Why 7 Entries?
 
-- Running every 6 hours = 4 times per day
-- 7 entries = ~1.75 days of history
+- Running every hour = 24 times per day
+- 7 entries = ~7 hours of history
 - Perfect for showing short-term trends in graphs
 
 ### Viewing History
@@ -146,7 +146,7 @@ Look for commits with message:
 📊 Update survivability scores [automated]
 ```
 
-These are created by GitHub Actions bot every 6 hours.
+These are created by GitHub Actions bot every hour.
 
 ## Troubleshooting
 
@@ -196,10 +196,12 @@ Once this is running:
 
 ## Cron Schedule Reference
 
-Current: `0 */6 * * *` = Every 6 hours
+Current: `0 * * * *` = Every hour
 
 To change frequency:
+- Every 30 minutes: `*/30 * * * *`
 - Every 3 hours: `0 */3 * * *`
+- Every 6 hours: `0 */6 * * *`
 - Every 12 hours: `0 */12 * * *`
 - Daily at midnight: `0 0 * * *`
 - Twice daily (00:00, 12:00): `0 0,12 * * *`
