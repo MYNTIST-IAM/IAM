@@ -38,10 +38,15 @@ jobs:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: python scripts/survivability_scoring.py
 
+      - name: Send alerts and notifications
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python scripts/send_alerts.py
+
       - name: Commit and push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add security/token-ledger.yml reports/
+          git add security/token-ledger.yml reports/ logs/
           git diff --quiet && git diff --staged --quiet || (git commit -m "📊 Update survivability scores [automated]" && git push origin main)
 

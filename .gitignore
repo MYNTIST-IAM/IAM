@@ -17,9 +17,9 @@ build/
 
 # Reports
 
-# Logs
-logs/
+# Logs (but keep alerts.log for tracking)
 *.log
+!logs/alerts.log
 
 # IDE
 .vscode/
