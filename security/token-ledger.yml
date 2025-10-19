@@ -14,8 +14,6 @@ tokens:
   role: ci_cd
   state: active
   score_history:
-  - timestamp: '2025-10-15T04:45:09.712291'
-    score: 1.0
   - timestamp: '2025-10-15T04:47:04.400399'
     score: 1.0
   - timestamp: '2025-10-15T23:31:51.200106'
@@ -28,7 +26,9 @@ tokens:
     score: 1.0
   - timestamp: '2025-10-18T01:50:02.493463'
     score: 1.0
-  last_scored: '2025-10-18T01:50:02.493469'
+  - timestamp: '2025-10-19T02:08:02.524645'
+    score: 1.0
+  last_scored: '2025-10-19T02:08:02.524652'
 - token_id: def456
   owner: user2
   scope: repo, workflow
@@ -44,8 +44,6 @@ tokens:
   role: ci_cd
   state: active
   score_history:
-  - timestamp: '2025-10-15T04:45:09.712325'
-    score: 0.5
   - timestamp: '2025-10-15T04:47:04.400449'
     score: 0.5
   - timestamp: '2025-10-15T23:31:51.200119'
@@ -58,7 +56,9 @@ tokens:
     score: 0.5
   - timestamp: '2025-10-18T01:50:02.493475'
     score: 0.5
-  last_scored: '2025-10-18T01:50:02.493477'
+  - timestamp: '2025-10-19T02:08:02.524658'
+    score: 0.5
+  last_scored: '2025-10-19T02:08:02.524660'
 - token_id: ghi789
   owner: user3
   scope: admin:org
@@ -74,8 +74,6 @@ tokens:
   role: api_access
   state: active
   score_history:
-  - timestamp: '2025-10-15T04:45:09.712337'
-    score: 1.0
   - timestamp: '2025-10-15T04:47:04.400462'
     score: 1.0
   - timestamp: '2025-10-15T23:31:51.200124'
@@ -88,7 +86,9 @@ tokens:
     score: 1.0
   - timestamp: '2025-10-18T01:50:02.493481'
     score: 1.0
-  last_scored: '2025-10-18T01:50:02.493483'
+  - timestamp: '2025-10-19T02:08:02.524664'
+    score: 1.0
+  last_scored: '2025-10-19T02:08:02.524666'
 - token_id: '52085750'
   owner: HamzaMasood7
   scope: admin:org, repo, workflow, write:packages
@@ -116,7 +116,9 @@ tokens:
     score: 0.25
   - timestamp: '2025-10-18T01:50:02.493487'
     score: 0.25
-  last_scored: '2025-10-18T01:50:02.493489'
+  - timestamp: '2025-10-19T02:08:02.524669'
+    score: 0.25
+  last_scored: '2025-10-19T02:08:02.524671'
 - token_id: '133033842'
   owner: hamzaMasood-7
   scope: read:org, repo
@@ -142,7 +144,9 @@ tokens:
     score: 0.5
   - timestamp: '2025-10-18T01:50:02.493492'
     score: 0.5
-  last_scored: '2025-10-18T01:50:02.493493'
+  - timestamp: '2025-10-19T02:08:02.524675'
+    score: 0.5
+  last_scored: '2025-10-19T02:08:02.524676'
 - token_id: '115296346'
   owner: Muhammad-Usman-cs
   scope: read:org, repo
@@ -168,4 +172,6 @@ tokens:
     score: 0.5
   - timestamp: '2025-10-18T01:50:02.493497'
     score: 0.5
-  last_scored: '2025-10-18T01:50:02.493498'
+  - timestamp: '2025-10-19T02:08:02.524679'
+    score: 0.5
+  last_scored: '2025-10-19T02:08:02.524680'
