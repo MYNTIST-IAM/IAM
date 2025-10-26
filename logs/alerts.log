@@ -42,3 +42,7 @@
 [2025-10-25 01:54:51] ✅ RECOVERY: Token ghi789 (owner: user3) has recovered with score 1.0. Token health improved.
 [2025-10-25 01:54:51] ⚠️ WARNING: Token 52085750 (owner: HamzaMasood7) is degrading with score 0.25. Reduced survivability detected.
 [2025-10-25 01:54:51] DIGEST: Total=6, Healthy=2, Degrading=3, Critical=1, AvgScore=0.625
+[2025-10-26 02:04:00] ✅ RECOVERY: Token abc123 (owner: user1) has recovered with score 1.0. Token health improved.
+[2025-10-26 02:04:00] ✅ RECOVERY: Token ghi789 (owner: user3) has recovered with score 1.0. Token health improved.
+[2025-10-26 02:04:00] ⚠️ WARNING: Token 52085750 (owner: HamzaMasood7) is degrading with score 0.25. Reduced survivability detected.
+[2025-10-26 02:04:00] DIGEST: Total=6, Healthy=2, Degrading=3, Critical=1, AvgScore=0.625
