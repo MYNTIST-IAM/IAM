@@ -112,5 +112,3 @@ jobs:
           fi
           git commit -m "autoheal: link pending actions to PR #$PR_NUMBER"
           git push origin "${{ steps.branch.outputs.branch }}"
-
-
