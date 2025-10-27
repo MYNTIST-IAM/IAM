@@ -1,0 +1,37 @@
+version: 1
+risk:
+  critical_threshold: 0.2
+  warning_threshold: 0.5
+  recovery_threshold: 0.8
+
+acceptance:
+  last_n: 7
+  min_critical_count_in_last_n: 3
+  max_drop_24h: 0.4
+  min_days_since_last_used: 14
+  grace_hours: 24
+  prefer_downgrade_before_revoke: true
+
+exemptions:
+  users: []
+  tokens: []
+
+actions:
+  user:
+    admin:
+      primary: org_role_change
+      target_role: member
+      fallback: revoke_org_access
+    member:
+      primary: revoke_org_access
+  service_account:
+    default:
+      primary: scope_reduction
+      target_scopes:
+        - read:org
+        - repo
+
+reviewers:
+  security_reviewers_env: SECURITY_REVIEWERS
+
+

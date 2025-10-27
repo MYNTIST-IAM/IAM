@@ -7,8 +7,7 @@ tokens:
   expiry: '2026-01-01'
   last_used: '2025-05-05'
   audit_trail:
-  - commit1
-  - repo1
+  - { event: seed }
   survivability_score: 1.0
   entity_type: service_account
   role: ci_cd
@@ -37,8 +36,7 @@ tokens:
   expiry: '2026-02-01'
   last_used: '2025-06-06'
   audit_trail:
-  - commit2
-  - repo2
+  - { event: seed }
   survivability_score: 0.5
   entity_type: service_account
   role: ci_cd
@@ -67,8 +65,7 @@ tokens:
   expiry: '2026-03-01'
   last_used: '2025-07-07'
   audit_trail:
-  - commit3
-  - repo3
+  - { event: seed }
   survivability_score: 1.0
   entity_type: service_account
   role: api_access
