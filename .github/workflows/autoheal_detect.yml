@@ -87,20 +87,22 @@ jobs:
             echo "No PR number found"
             exit 0
           fi
-          python - "$PR_NUMBER" <<'PY'
-  import yaml,sys
-  from pathlib import Path
-  lp=Path('security/token-ledger.yml')
-  d=yaml.safe_load(lp.read_text())
-  changed=False
-  for t in d.get('tokens',[]):
-      pa=t.get('pending_action')
-      if isinstance(pa,dict) and (pa.get('pr_number') in (None,'',0)):
-          pa['pr_number']=int(sys.argv[1])
-          changed=True
-  if changed:
-      lp.write_text(yaml.dump(d, default_flow_style=False, sort_keys=False))
-PY
+          printf '%s\n' \
+            'import yaml,sys' \
+            'from pathlib import Path' \
+            'lp=Path("security/token-ledger.yml")' \
+            'd=yaml.safe_load(lp.read_text())' \
+            'changed=False' \
+            'for t in d.get("tokens",[]):' \
+            '    pa=t.get("pending_action")' \
+            '    if isinstance(pa,dict) and (pa.get("pr_number") in (None,"",0)):' \
+            '        pa["pr_number"]=int(sys.argv[1])' \
+            '        changed=True' \
+            'if changed:' \
+            '    lp.write_text(yaml.dump(d, default_flow_style=False, sort_keys=False))' \
+            > link_pr.py
+          python link_pr.py "$PR_NUMBER"
+          rm -f link_pr.py
           git config user.email "bot@users.noreply.github.com"
           git config user.name "auto-heal-bot"
           git add security/token-ledger.yml || true
