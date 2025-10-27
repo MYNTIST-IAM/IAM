@@ -3,7 +3,7 @@ name: Auto-Heal Detect
 on:
   schedule:
     - cron: '0 */6 * * *'
-  workflow_dispatch: {}
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   detect:
