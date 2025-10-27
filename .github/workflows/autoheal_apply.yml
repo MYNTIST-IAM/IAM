@@ -1,0 +1,50 @@
+name: Auto-Heal Apply
+
+on:
+  pull_request:
+    types: [closed]
+    paths:
+      - 'IAM/ops/autoheal/**'
+
+jobs:
+  apply:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r IAM/requirements.txt
+
+      - name: Apply auto-heal manifests
+        env:
+          ORG_NAME: ${{ secrets.ORG_NAME }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          cd IAM
+          python scripts/apply_autoheal.py > apply_output.json
+          cat apply_output.json
+
+      - name: Commit ledger updates
+        run: |
+          git config user.email "bot@users.noreply.github.com"
+          git config user.name "auto-heal-bot"
+          git add IAM/security/token-ledger.yml
+          if git diff --cached --quiet; then
+            echo "No ledger changes"
+            exit 0
+          fi
+          git commit -m "autoheal: apply results and audit trail"
+          git push
+
+

@@ -13,6 +13,7 @@ load_dotenv()
 SLACK_WEBHOOK_URL = os.getenv('SLACK_WEBHOOK_URL')
 REPORT_JSON = Path("reports/token_health.json")
 ALERT_LOG = Path("logs/alerts.log")
+LEDGER_PATH = Path("security/token-ledger.yml")
 
 # Alert thresholds
 CRITICAL_THRESHOLD = 0.2
@@ -230,6 +231,23 @@ def main():
     if not alerts:
         print("✅ No alerts triggered - all tokens are in acceptable state")
     
+    # Try to surface pending auto-heal proposals
+    pending = []
+    try:
+        with open(LEDGER_PATH, 'r') as f:
+            ledger = yaml.safe_load(f)
+        for t in ledger.get('tokens', []):
+            pa = t.get('pending_action')
+            if isinstance(pa, dict) and pa.get('type'):
+                pending.append({
+                    'token_id': t.get('token_id'),
+                    'owner': t.get('owner'),
+                    'action': pa.get('type'),
+                    'pr': pa.get('pr_number')
+                })
+    except Exception:
+        pass
+
     # Generate daily digest
     digest = generate_daily_digest(tokens)
     
@@ -239,6 +257,21 @@ def main():
     
     # Send to Slack
     blocks = create_slack_blocks(alerts, digest)
+    if pending:
+        blocks.append({"type": "divider"})
+        blocks.append({
+            "type": "section",
+            "text": {"type": "mrkdwn", "text": "*🛠 Pending Auto‑Heal Proposals:*"}
+        })
+        for p in pending[:10]:
+            pr_text = f"PR #{p['pr']}" if p.get('pr') else "PR pending"
+            blocks.append({
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": f"Token `{p['token_id']}` · Owner `{p['owner']}` · Action `{p['action']}` · {pr_text}"
+                }
+            })
     summary_text = f"Token Health: {digest['healthy']} healthy, {digest['degrading']} degrading, {digest['critical']} critical"
     
     send_slack_message(blocks, summary_text)
