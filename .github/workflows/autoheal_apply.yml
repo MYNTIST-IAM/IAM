@@ -5,6 +5,7 @@ on:
     types: [closed]
     paths:
       - 'ops/autoheal/**'
+  workflow_dispatch: # Allow manual trigger
 
 permissions:
   contents: write
