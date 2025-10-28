@@ -1,0 +1,14 @@
+token_id: def456
+owner: user2
+entity_type: service_account
+current_state:
+  role: ci_cd
+  state: active
+  scope: repo, workflow
+proposed_action:
+  type: scope_reduction
+  target_scopes:
+  - read:org
+  - repo
+reason: unused_days=144
+proposed_at: '2025-10-28T02:01:11.153041'

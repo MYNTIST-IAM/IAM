@@ -1,0 +1,8 @@
+{
+  "manifests": [
+    "ops/autoheal/20251028/abc123.yml",
+    "ops/autoheal/20251028/def456.yml",
+    "ops/autoheal/20251028/ghi789.yml"
+  ],
+  "count": 3
+}
