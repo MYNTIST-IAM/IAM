@@ -81,7 +81,7 @@ jobs:
       - name: Record PR number in ledger (best-effort)
         if: steps.branch.outputs.branch != ''
         env:
-          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           if command -v gh >/dev/null 2>&1; then
             PR_NUMBER=$(gh pr list --head "${{ steps.branch.outputs.branch }}" --state open --json number --jq '.[0].number' || echo "")
