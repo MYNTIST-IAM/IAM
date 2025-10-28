@@ -5,13 +5,19 @@ on:
     - cron: '0 */6 * * *'
   workflow_dispatch: # Allow manual trigger
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
 jobs:
   detect:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -61,7 +67,7 @@ jobs:
         if: steps.branch.outputs.branch != ''
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
           title: "Auto-Heal: Proposed Remediations"
           body: |
             This PR proposes auto-heal remediations based on policy and score history.
@@ -75,7 +81,7 @@ jobs:
       - name: Record PR number in ledger (best-effort)
         if: steps.branch.outputs.branch != ''
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           if command -v gh >/dev/null 2>&1; then
             PR_NUMBER=$(gh pr list --head "${{ steps.branch.outputs.branch }}" --state open --json number --jq '.[0].number' || echo "")
