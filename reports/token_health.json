@@ -6,10 +6,6 @@
     "status": "Healthy",
     "score_history": [
       {
-        "timestamp": "2025-10-22T02:01:48.116019",
-        "score": 1.0
-      },
-      {
         "timestamp": "2025-10-23T01:57:00.660701",
         "score": 1.0
       },
@@ -32,6 +28,10 @@
       {
         "timestamp": "2025-10-28T01:57:34.289574",
         "score": 1.0
+      },
+      {
+        "timestamp": "2025-10-28T06:37:32.663393",
+        "score": 1.0
       }
     ]
   },
@@ -41,10 +41,6 @@
     "survivability_score": 0.5,
     "status": "Degrading",
     "score_history": [
-      {
-        "timestamp": "2025-10-22T02:01:48.116032",
-        "score": 0.5
-      },
       {
         "timestamp": "2025-10-23T01:57:00.660714",
         "score": 0.5
@@ -68,6 +64,10 @@
       {
         "timestamp": "2025-10-28T01:57:34.289587",
         "score": 0.5
+      },
+      {
+        "timestamp": "2025-10-28T06:37:32.663408",
+        "score": 0.5
       }
     ]
   },
@@ -77,10 +77,6 @@
     "survivability_score": 1.0,
     "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-10-22T02:01:48.116039",
-        "score": 1.0
-      },
       {
         "timestamp": "2025-10-23T01:57:00.660720",
         "score": 1.0
@@ -104,6 +100,10 @@
       {
         "timestamp": "2025-10-28T01:57:34.289593",
         "score": 1.0
+      },
+      {
+        "timestamp": "2025-10-28T06:37:32.663414",
+        "score": 1.0
       }
     ]
   },
@@ -113,10 +113,6 @@
     "survivability_score": 0.25,
     "status": "Critical",
     "score_history": [
-      {
-        "timestamp": "2025-10-22T02:01:48.116044",
-        "score": 0.25
-      },
       {
         "timestamp": "2025-10-23T01:57:00.660725",
         "score": 0.25
@@ -140,6 +136,10 @@
       {
         "timestamp": "2025-10-28T01:57:34.289598",
         "score": 0.25
+      },
+      {
+        "timestamp": "2025-10-28T06:37:32.663420",
+        "score": 0.25
       }
     ]
   },
@@ -149,10 +149,6 @@
     "survivability_score": 0.5,
     "status": "Degrading",
     "score_history": [
-      {
-        "timestamp": "2025-10-22T02:01:48.116049",
-        "score": 0.5
-      },
       {
         "timestamp": "2025-10-23T01:57:00.660752",
         "score": 0.5
@@ -176,6 +172,10 @@
       {
         "timestamp": "2025-10-28T01:57:34.289603",
         "score": 0.5
+      },
+      {
+        "timestamp": "2025-10-28T06:37:32.663424",
+        "score": 0.5
       }
     ]
   },
@@ -185,10 +185,6 @@
     "survivability_score": 0.5,
     "status": "Degrading",
     "score_history": [
-      {
-        "timestamp": "2025-10-22T02:01:48.116054",
-        "score": 0.5
-      },
       {
         "timestamp": "2025-10-23T01:57:00.660765",
         "score": 0.5
@@ -211,6 +207,10 @@
       },
       {
         "timestamp": "2025-10-28T01:57:34.289608",
+        "score": 0.5
+      },
+      {
+        "timestamp": "2025-10-28T06:37:32.663429",
         "score": 0.5
       }
     ]
