@@ -7,14 +7,12 @@ tokens:
   expiry: '2026-01-01'
   last_used: '2025-05-05'
   audit_trail:
-  - { event: seed }
+  - event: seed
   survivability_score: 1.0
   entity_type: service_account
   role: ci_cd
   state: active
   score_history:
-  - timestamp: '2025-10-21T01:58:21.238805'
-    score: 1.0
   - timestamp: '2025-10-22T02:01:48.116019'
     score: 1.0
   - timestamp: '2025-10-23T01:57:00.660701'
@@ -27,7 +25,9 @@ tokens:
     score: 1.0
   - timestamp: '2025-10-27T02:08:11.590873'
     score: 1.0
-  last_scored: '2025-10-27T02:08:11.590879'
+  - timestamp: '2025-10-28T01:57:34.289574'
+    score: 1.0
+  last_scored: '2025-10-28T01:57:34.289581'
 - token_id: def456
   owner: user2
   scope: repo, workflow
@@ -36,14 +36,12 @@ tokens:
   expiry: '2026-02-01'
   last_used: '2025-06-06'
   audit_trail:
-  - { event: seed }
+  - event: seed
   survivability_score: 0.5
   entity_type: service_account
   role: ci_cd
   state: active
   score_history:
-  - timestamp: '2025-10-21T01:58:21.238817'
-    score: 0.5
   - timestamp: '2025-10-22T02:01:48.116032'
     score: 0.5
   - timestamp: '2025-10-23T01:57:00.660714'
@@ -56,7 +54,9 @@ tokens:
     score: 0.5
   - timestamp: '2025-10-27T02:08:11.590885'
     score: 0.5
-  last_scored: '2025-10-27T02:08:11.590887'
+  - timestamp: '2025-10-28T01:57:34.289587'
+    score: 0.5
+  last_scored: '2025-10-28T01:57:34.289589'
 - token_id: ghi789
   owner: user3
   scope: admin:org
@@ -65,14 +65,12 @@ tokens:
   expiry: '2026-03-01'
   last_used: '2025-07-07'
   audit_trail:
-  - { event: seed }
+  - event: seed
   survivability_score: 1.0
   entity_type: service_account
   role: api_access
   state: active
   score_history:
-  - timestamp: '2025-10-21T01:58:21.238824'
-    score: 1.0
   - timestamp: '2025-10-22T02:01:48.116039'
     score: 1.0
   - timestamp: '2025-10-23T01:57:00.660720'
@@ -85,7 +83,9 @@ tokens:
     score: 1.0
   - timestamp: '2025-10-27T02:08:11.590890'
     score: 1.0
-  last_scored: '2025-10-27T02:08:11.590892'
+  - timestamp: '2025-10-28T01:57:34.289593'
+    score: 1.0
+  last_scored: '2025-10-28T01:57:34.289595'
 - token_id: '52085750'
   owner: HamzaMasood7
   scope: admin:org, repo, workflow, write:packages
@@ -101,8 +101,6 @@ tokens:
   role: admin
   state: active
   score_history:
-  - timestamp: '2025-10-21T01:58:21.238829'
-    score: 0.25
   - timestamp: '2025-10-22T02:01:48.116044'
     score: 0.25
   - timestamp: '2025-10-23T01:57:00.660725'
@@ -115,7 +113,9 @@ tokens:
     score: 0.25
   - timestamp: '2025-10-27T02:08:11.590896'
     score: 0.25
-  last_scored: '2025-10-27T02:08:11.590898'
+  - timestamp: '2025-10-28T01:57:34.289598'
+    score: 0.25
+  last_scored: '2025-10-28T01:57:34.289600'
 - token_id: '133033842'
   owner: hamzaMasood-7
   scope: read:org, repo
@@ -131,8 +131,6 @@ tokens:
   role: member
   state: active
   score_history:
-  - timestamp: '2025-10-21T01:58:21.238834'
-    score: 0.5
   - timestamp: '2025-10-22T02:01:48.116049'
     score: 0.5
   - timestamp: '2025-10-23T01:57:00.660752'
@@ -145,7 +143,9 @@ tokens:
     score: 0.5
   - timestamp: '2025-10-27T02:08:11.590901'
     score: 0.5
-  last_scored: '2025-10-27T02:08:11.590903'
+  - timestamp: '2025-10-28T01:57:34.289603'
+    score: 0.5
+  last_scored: '2025-10-28T01:57:34.289604'
 - token_id: '115296346'
   owner: Muhammad-Usman-cs
   scope: read:org, repo
@@ -161,8 +161,6 @@ tokens:
   role: member
   state: active
   score_history:
-  - timestamp: '2025-10-21T01:58:21.238839'
-    score: 0.5
   - timestamp: '2025-10-22T02:01:48.116054'
     score: 0.5
   - timestamp: '2025-10-23T01:57:00.660765'
@@ -175,4 +173,6 @@ tokens:
     score: 0.5
   - timestamp: '2025-10-27T02:08:11.590906'
     score: 0.5
-  last_scored: '2025-10-27T02:08:11.590908'
+  - timestamp: '2025-10-28T01:57:34.289608'
+    score: 0.5
+  last_scored: '2025-10-28T01:57:34.289609'
