@@ -1,0 +1,14 @@
+token_id: abc123
+owner: user1
+entity_type: service_account
+current_state:
+  role: ci_cd
+  state: active
+  scope: read:repo
+proposed_action:
+  type: scope_reduction
+  target_scopes:
+  - read:org
+  - repo
+reason: unused_days=177
+proposed_at: '2025-10-29T18:35:58.462300'
