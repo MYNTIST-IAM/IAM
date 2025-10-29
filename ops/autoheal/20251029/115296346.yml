@@ -1,0 +1,11 @@
+token_id: '115296346'
+owner: Muhammad-Usman-cs
+entity_type: user
+current_state:
+  role: member
+  state: active
+  scope: read:org, repo
+proposed_action:
+  type: revoke_org_access
+reason: unused_days=14
+proposed_at: '2025-10-29T06:37:53.263698'
