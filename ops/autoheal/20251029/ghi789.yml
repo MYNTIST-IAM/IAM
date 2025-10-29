@@ -1,0 +1,14 @@
+token_id: ghi789
+owner: user3
+entity_type: service_account
+current_state:
+  role: api_access
+  state: active
+  scope: admin:org
+proposed_action:
+  type: scope_reduction
+  target_scopes:
+  - read:org
+  - repo
+reason: unused_days=114
+proposed_at: '2025-10-29T12:53:34.139233'
