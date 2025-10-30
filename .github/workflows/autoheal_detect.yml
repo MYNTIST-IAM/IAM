@@ -70,40 +70,5 @@ jobs:
           reviewers: ${{ secrets.SECURITY_REVIEWERS }}
           commit-message: "autoheal: propose remediation for $(jq -r '.count // 0' detect_output.json) tokens"
 
-      - name: Record PR number in ledger (best-effort)
-        if: steps.check.outputs.has_candidates == 'true'
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          # Get PR number from the create-pull-request action output
-          PR_NUMBER="${{ steps.create-pr.outputs.pull-request-number }}"
-          if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" = "null" ]; then
-            echo "No PR number found from create-pull-request action"
-            exit 0
-          fi
-          echo "Linking PR #$PR_NUMBER to pending actions"
-          printf '%s\n' \
-            'import yaml,sys' \
-            'from pathlib import Path' \
-            'lp=Path("security/token-ledger.yml")' \
-            'd=yaml.safe_load(lp.read_text())' \
-            'changed=False' \
-            'for t in d.get("tokens",[]):' \
-            '    pa=t.get("pending_action")' \
-            '    if isinstance(pa,dict) and (pa.get("pr_number") in (None,"",0)):' \
-            '        pa["pr_number"]=int(sys.argv[1])' \
-            '        changed=True' \
-            'if changed:' \
-            '    lp.write_text(yaml.dump(d, default_flow_style=False, sort_keys=False))' \
-            > link_pr.py
-          python link_pr.py "$PR_NUMBER"
-          rm -f link_pr.py
-          git config user.email "bot@users.noreply.github.com"
-          git config user.name "auto-heal-bot"
-          git add security/token-ledger.yml || true
-          if git diff --cached --quiet; then
-            echo "No ledger PR-number changes"
-            exit 0
-          fi
-          git commit -m "autoheal: link pending actions to PR #$PR_NUMBER"
-          git push
+      # Note: pending_action is only stored in manifest files (ops/autoheal/), not in token ledger
+      # PR information is available in the PR itself and audit_trail entries in the ledger

@@ -3,6 +3,8 @@ name: Auto-Heal Apply
 on:
   pull_request:
     types: [closed]
+    branches:
+      - main
     paths:
       - 'ops/autoheal/**'
   workflow_dispatch: # Allow manual trigger
@@ -14,14 +16,15 @@ permissions:
 
 jobs:
   apply:
-    if: github.event.pull_request.merged == true
+    if: |
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'autoheal-')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
-        with:
           token: ${{ secrets.PAT_TOKEN }}
       - name: Setup Python
         uses: actions/setup-python@v5

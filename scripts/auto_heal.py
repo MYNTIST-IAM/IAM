@@ -35,27 +35,87 @@ def is_candidate(token: dict, policy: dict, scores: list) -> tuple[bool, str]:
     max_drop_24h = acceptance.get("max_drop_24h", 0.4)
     min_days_since_last_used = acceptance.get("min_days_since_last_used", 14)
 
+    # Get risk thresholds from policy
+    risk = policy.get("risk", {})
+    critical_threshold = risk.get("critical_threshold", 0.2)
+    warning_threshold = risk.get("warning_threshold", 0.5)
+    recovery_threshold = risk.get("recovery_threshold", 0.8)
+
+    # Get current score
+    current_score = token.get("survivability_score", 1.0)
+    if not isinstance(current_score, (int, float)):
+        current_score = 1.0
+
     # recent scores
     recent = scores[-last_n:] if scores else []
-    critical_threshold = policy.get("risk", {}).get("critical_threshold", 0.2)
-    critical_count = sum(1 for s in recent if s < critical_threshold)
+    
+    # If score is above recovery threshold (0.8), skip unless there's a severe drop
+    # Don't flag healthy tokens (score >= 0.8) just for being unused
+    if current_score >= recovery_threshold:
+        # Only check for severe drops (> 0.5) in healthy tokens
+        if len(recent) >= 2:
+            drop = recent[-2] - recent[-1]
+            if drop >= 0.5:  # Severe drop from healthy state
+                return True, f"severe_drop_from_healthy={round(drop,3)}"
+        # Skip healthy tokens for other checks
+        return False, "score_above_recovery_threshold"
 
     reasons = []
-    if critical_count >= min_critical:
-        reasons.append(f"critical_count={critical_count} in last {last_n}")
-
-    # drop in 24h
-    if len(recent) >= 2:
-        drop = recent[-2] - recent[-1]
-        if drop >= max_drop_24h:
-            reasons.append(f"drop_24h={round(drop,3)}")
-
-    # last used
-    last_used_str = token.get("last_used")
-    if last_used_str:
-        delta_days = (datetime.now() - parse_iso8601(last_used_str)).days
-        if delta_days >= min_days_since_last_used:
-            reasons.append(f"unused_days={delta_days}")
+    
+    # Score-based checks - only flag if score is below thresholds
+    if current_score < critical_threshold:
+        # Score < 0.2 - Critical - flag for any reason
+        critical_count = sum(1 for s in recent if s < critical_threshold)
+        if critical_count >= min_critical:
+            reasons.append(f"score={round(current_score,3)}<0.2; critical_count={critical_count}/{last_n}")
+        
+        # Check for drops even in critical
+        if len(recent) >= 2:
+            drop = recent[-2] - recent[-1]
+            if drop >= max_drop_24h:
+                reasons.append(f"score={round(current_score,3)}<0.2; drop_24h={round(drop,3)}")
+        
+        # Check unused days for critical tokens
+        last_used_str = token.get("last_used")
+        if last_used_str:
+            delta_days = (datetime.now() - parse_iso8601(last_used_str)).days
+            if delta_days >= min_days_since_last_used:
+                reasons.append(f"score={round(current_score,3)}<0.2; unused_days={delta_days}")
+    
+    elif current_score < warning_threshold:
+        # Score 0.2-0.5 - Warning - flag for multiple issues
+        critical_count = sum(1 for s in recent if s < critical_threshold)
+        if critical_count >= min_critical:
+            reasons.append(f"score={round(current_score,3)}<0.5; critical_count={critical_count}/{last_n}")
+        
+        # Check for significant drops
+        if len(recent) >= 2:
+            drop = recent[-2] - recent[-1]
+            if drop >= max_drop_24h:
+                reasons.append(f"score={round(current_score,3)}<0.5; drop_24h={round(drop,3)}")
+        
+        # Only flag unused if score is low AND unused (combined condition)
+        last_used_str = token.get("last_used")
+        if last_used_str:
+            delta_days = (datetime.now() - parse_iso8601(last_used_str)).days
+            # For warning scores, require longer unused period (double the threshold)
+            if delta_days >= (min_days_since_last_used * 2):
+                reasons.append(f"score={round(current_score,3)}<0.5; unused_days={delta_days}")
+    
+    # Score 0.5-0.8 - Degrading but not critical - only flag for severe issues
+    elif current_score < recovery_threshold:
+        # Only flag if multiple severe issues
+        critical_count = sum(1 for s in recent if s < critical_threshold)
+        severe_drop_threshold = max_drop_24h * 1.5  # More severe drop required
+        
+        if len(recent) >= 2:
+            drop = recent[-2] - recent[-1]
+            if drop >= severe_drop_threshold:
+                reasons.append(f"degrading_score={round(current_score,3)}; severe_drop={round(drop,3)}")
+        
+        # Require multiple critical scores to flag degrading tokens
+        if critical_count >= (min_critical + 2):  # At least 5 out of 7
+            reasons.append(f"degrading_score={round(current_score,3)}; high_critical_count={critical_count}")
 
     # exemptions
     ex_users = set(policy.get("exemptions", {}).get("users", []))
@@ -114,18 +174,11 @@ def build_manifest(token: dict, reason: str, policy: dict) -> dict:
     return manifest
 
 
-def update_ledger_with_proposal(ledger: dict, token_id: str, manifest: dict, pr_number: int | None):
+def update_ledger_with_audit(ledger: dict, token_id: str, manifest: dict, pr_number: int | None):
+    """Update ledger with audit trail only - pending_action should NOT be in ledger"""
     for t in ledger.get("tokens", []):
         if str(t.get("token_id")) == str(token_id):
-            t["pending_action"] = {
-                "type": manifest["proposed_action"]["type"],
-                "reason": manifest["reason"],
-                "evidence": {
-                    "score_history_tail": t.get("score_history", [])[-7:],
-                },
-                "pr_number": pr_number,
-                "proposed_at": manifest["proposed_at"],
-            }
+            # Only add to audit trail, NOT pending_action
             audit_entry = {
                 "event": "proposed",
                 "action": manifest["proposed_action"],
@@ -191,9 +244,15 @@ def main():
         save_yaml(manifest_path, manifest)
         manifests.append((token, manifest_path, manifest))
 
-    # Update ledger with proposals (PR number unknown yet; set to None)
+    # Update ledger with audit trail only (pending_action stays in manifest files only)
     for token, manifest_path, manifest in manifests:
-        update_ledger_with_proposal(ledger, token["token_id"], manifest, pr_number=None)
+        update_ledger_with_audit(ledger, token["token_id"], manifest, pr_number=None)
+    
+    # Clean up any existing pending_action entries from previous runs
+    # pending_action should only exist in manifest files, not in ledger
+    for token in ledger.get("tokens", []):
+        if "pending_action" in token:
+            del token["pending_action"]
 
     save_yaml(LEDGER_PATH, ledger)
 

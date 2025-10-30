@@ -37,6 +37,9 @@ def calculate_score(scope, used, drift, audit, token_data=None):
         repo_summary = token_data['repo_access_summary']
         total_repos = repo_summary.get('total_repos', 0)
         private_repos = repo_summary.get('private_repos', 0)
+        pull_repo_count = repo_summary.get('pull_repos', 0)
+        push_repo_count = repo_summary.get('push_repos', 0)
+        maintain_repo_count = repo_summary.get('maintain_repos', 0)
         admin_repos = repo_summary.get('admin_repos', 0)
         
         # Boost score based on repository access
@@ -44,6 +47,10 @@ def calculate_score(scope, used, drift, audit, token_data=None):
             repo_multiplier = 1.0 + (total_repos * 0.1)  # 0.1 per repo
             if private_repos > 0:
                 repo_multiplier += (private_repos * 0.2)  # Extra boost for private repo access
+            if push_repo_count > 0:
+                repo_multiplier += (push_repo_count * 0.15)  # Boost for write access
+            if maintain_repo_count > 0:
+                repo_multiplier += (maintain_repo_count * 0.2)  # Boost for maintain access
             if admin_repos > 0:
                 repo_multiplier += (admin_repos * 0.3)  # Extra boost for admin repo access
     
@@ -80,8 +87,9 @@ def calculate_score(scope, used, drift, audit, token_data=None):
     # Calculate final score
     S = base_score * role_multiplier * repo_multiplier * time_factor * audit_factor
     
-    # Cap the score at 2.0 to prevent unrealistic scores
-    S = min(2.0, S)
+    # Normalize score to 0-1 range
+    # Cap the score at 1.0 (survivability scores should be 0-1)
+    S = min(1.0, max(0.0, S))
     
     return round(S, 3)
 
@@ -191,8 +199,8 @@ with open(HISTORY_JSON, "w") as f:
 with open(REPORT_MD, "w") as f:
     f.write("# Token Health Report\n\n")
     f.write(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}\n\n")
-    f.write("| Token ID | Owner | Role | Score | Status | Repos | Private | Admin | Trend (Last 7) |\n")
-    f.write("|----------|-------|------|-------|--------|-------|---------|-------|----------------|\n")
+    f.write("| Token ID | Owner | Role | Score | Status | Repos | Private | Pull | Push | Admin | Trend (Last 7) |\n")
+    f.write("|----------|-------|------|-------|--------|-------|---------|------|------|-------|----------------|\n")
     for r in results:
         history_scores = [h["score"] for h in r["score_history"]]
         trend = " → ".join([str(s) for s in history_scores])
@@ -204,9 +212,11 @@ with open(REPORT_MD, "w") as f:
         repo_info = r.get('repo_access', {})
         total_repos = repo_info.get('total_repos', 0)
         private_repos = repo_info.get('private_repos', 0)
+        pull_repos = repo_info.get('pull_repos', 0)
+        push_repos = repo_info.get('push_repos', 0)
         admin_repos = repo_info.get('admin_repos', 0)
         
-        f.write(f"| {r['token_id']} | {r['owner']} | {role} | {r['survivability_score']} | {r['status']} | {total_repos} | {private_repos} | {admin_repos} | {trend} |\n")
+        f.write(f"| {r['token_id']} | {r['owner']} | {role} | {r['survivability_score']} | {r['status']} | {total_repos} | {private_repos} | {pull_repos} | {push_repos} | {admin_repos} | {trend} |\n")
 
 print("✅ Survivability scoring complete. Reports generated in /reports/")
 print(f"📊 Score history maintained (max {MAX_HISTORY_ENTRIES} entries per token)")
