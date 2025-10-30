@@ -1,0 +1,11 @@
+{
+  "manifests": [
+    "ops/autoheal/20251030/abc123.yml",
+    "ops/autoheal/20251030/def456.yml",
+    "ops/autoheal/20251030/ghi789.yml",
+    "ops/autoheal/20251030/52085750.yml",
+    "ops/autoheal/20251030/133033842.yml",
+    "ops/autoheal/20251030/115296346.yml"
+  ],
+  "count": 6
+}
