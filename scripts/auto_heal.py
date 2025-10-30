@@ -91,7 +91,7 @@ def propose_action(token: dict, policy: dict) -> dict:
 
 
 def build_manifest(token: dict, reason: str, policy: dict) -> dict:
-    return {
+    manifest = {
         "token_id": token["token_id"],
         "owner": token.get("owner"),
         "entity_type": token.get("entity_type"),
@@ -104,6 +104,14 @@ def build_manifest(token: dict, reason: str, policy: dict) -> dict:
         "reason": reason,
         "proposed_at": datetime.now().isoformat(),
     }
+    
+    # For scope_reduction, include target repos if available in token metadata
+    if manifest["proposed_action"].get("type") == "scope_reduction":
+        repos = token.get("repos", [])
+        if repos:
+            manifest["targets"] = {"repos": repos}
+    
+    return manifest
 
 
 def update_ledger_with_proposal(ledger: dict, token_id: str, manifest: dict, pr_number: int | None):
@@ -141,7 +149,12 @@ def update_ledger_with_proposal(ledger: dict, token_id: str, manifest: dict, pr_
 
 def main():
     if not REPORT_JSON.exists():
-        print("❌ No report found. Run survivability_scoring.py first.")
+        # Output JSON for workflow compatibility
+        print(json.dumps({
+            "manifests": [],
+            "count": 0,
+            "error": "No report found. Ensure survivability_scoring.py runs before auto-heal detection."
+        }, indent=2))
         return
 
     policy = load_yaml(POLICY_PATH)
@@ -160,7 +173,11 @@ def main():
             candidates.append((token, reason))
 
     if not candidates:
-        print("✅ No auto-heal candidates found.")
+        print(json.dumps({
+            "manifests": [],
+            "count": 0,
+            "message": "No auto-heal candidates found."
+        }, indent=2))
         return
 
     date_dir = datetime.now().strftime("%Y%m%d")

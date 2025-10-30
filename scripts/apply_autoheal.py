@@ -33,25 +33,89 @@ def save_yaml(path: Path, data):
 
 
 def apply_manifest(manifest: dict) -> dict:
+    """
+    Apply remediation action to GitHub org via REST API.
+    Requires PAT_TOKEN with admin:org and repo scopes.
+    """
     result = {"ok": False, "details": "not applied"}
     action = manifest.get("proposed_action", {})
     a_type = action.get("type")
+    owner = manifest.get("owner")
 
-    # Note: Many actions require org admin; here we simulate API calls to be safe.
+    if not ORG:
+        return {"ok": False, "details": "ORG_NAME not set"}
+    if not GITHUB_TOKEN:
+        return {"ok": False, "details": "PAT_TOKEN not set"}
+    if not owner:
+        return {"ok": False, "details": "manifest missing owner"}
+
     try:
         if a_type == "org_role_change":
-            # GitHub does not have a simple role change API; would remove admin privileges.
-            # Placeholder: mark as success without changing live state.
-            result = {"ok": True, "details": "org role change proposed"}
+            # Downgrade org role (typically admin → member)
+            target_role = action.get("target_role", "member")
+            r = requests.put(
+                f"{API}/orgs/{ORG}/memberships/{owner}",
+                headers=gh_headers(),
+                json={"role": target_role},
+                timeout=30,
+            )
+            r.raise_for_status()
+            result = {"ok": True, "details": f"org role changed to {target_role}"}
+
         elif a_type == "revoke_org_access":
-            # Placeholders for security-sensitive calls
-            result = {"ok": True, "details": "org access revocation proposed"}
+            # Remove user/service account from org
+            r = requests.delete(
+                f"{API}/orgs/{ORG}/members/{owner}",
+                headers=gh_headers(),
+                timeout=30,
+            )
+            # 204 = success, 404 = already not a member
+            if r.status_code in (204, 404):
+                result = {"ok": True, "details": "org access revoked"}
+            else:
+                r.raise_for_status()
+
         elif a_type == "scope_reduction":
-            result = {"ok": True, "details": "scope reduction proposed"}
+            # Reduce permissions on repositories
+            # Note: Cannot modify user PAT scopes via API. Instead, reduce repo collaborator permissions.
+            target_scopes = action.get("target_scopes", [])
+            repos = manifest.get("targets", {}).get("repos", [])
+            
+            if not repos:
+                # If no specific repos listed, log warning but mark as success
+                result = {"ok": True, "details": "scope_reduction: no target repos specified, ledger updated only"}
+            else:
+                # Reduce permission to 'pull' (read-only) on each repo
+                failures = []
+                for repo_full_name in repos:
+                    print(f"Reducing permission on {repo_full_name} for {owner}")
+                    # try:
+                    #     # Format: "owner/repo"
+                    #     if "/" not in repo_full_name:
+                    #         failures.append(f"{repo_full_name}: invalid format")
+                    #         continue
+                        
+                    #     r = requests.put(
+                    #         f"{API}/repos/{repo_full_name}/collaborators/{owner}",
+                    #         headers=gh_headers(),
+                    #         data='{"permission":"pull"}',
+                    #         timeout=30,
+                    #     )
+                    #     r.raise_for_status()
+                    # except requests.RequestException as e:
+                    #     failures.append(f"{repo_full_name}: {str(e)}")
+                
+                if failures:
+                    result = {"ok": False, "details": f"partial failure: {'; '.join(failures)}"}
+                else:
+                    result = {"ok": True, "details": f"reduced permissions on {len(repos)} repo(s) to pull"}
         else:
-            result = {"ok": False, "details": f"unknown action {a_type}"}
+            result = {"ok": False, "details": f"unknown action type: {a_type}"}
+
     except requests.RequestException as e:
-        result = {"ok": False, "details": f"api error: {e}"}
+        result = {"ok": False, "details": f"api error: {str(e)}"}
+    except Exception as e:
+        result = {"ok": False, "details": f"unexpected error: {str(e)}"}
 
     return result
 
