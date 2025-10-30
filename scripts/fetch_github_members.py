@@ -46,6 +46,62 @@ def fetch_member_role(username):
         return None
 
 
+def fetch_org_repos():
+    """Fetch all repositories in the organization"""
+    url = f'https://api.github.com/orgs/{GITHUB_ORG_NAME}/repos'
+    
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"❌ Error fetching repositories: {e}")
+        return []
+
+
+def fetch_member_repo_access(username):
+    """Fetch repository access for a specific member"""
+    # Get all org repos first
+    repos = fetch_org_repos()
+    if not repos:
+        return []
+    
+    repo_access = []
+    
+    for repo in repos:
+        repo_name = repo['name']
+        repo_id = repo['id']
+        
+        # Check if user has access to this repo
+        url = f'https://api.github.com/repos/{GITHUB_ORG_NAME}/{repo_name}/collaborators/{username}'
+        
+        try:
+            response = requests.get(url, headers=headers)
+            if response.status_code == 204:  # User has access
+                # Get permission level
+                perm_url = f'https://api.github.com/repos/{GITHUB_ORG_NAME}/{repo_name}/collaborators/{username}/permission'
+                perm_response = requests.get(perm_url, headers=headers)
+                
+                if perm_response.status_code == 200:
+                    perm_data = perm_response.json()
+                    permission = perm_data.get('permission', 'read')
+                else:
+                    permission = 'read'  # Default to read if we can't get permission level
+                
+                repo_access.append({
+                    'repo_id': repo_id,
+                    'repo_name': repo_name,
+                    'permission': permission,
+                    'private': repo['private']
+                })
+                
+        except requests.exceptions.RequestException as e:
+            print(f"⚠️  Error checking access to {repo_name} for {username}: {e}")
+            continue
+    
+    return repo_access
+
+
 def update_token_ledger(members_data):
     """Update the token ledger with GitHub member information"""
     
@@ -78,11 +134,21 @@ def update_token_ledger(members_data):
         role = membership_info.get('role', 'member')
         state = membership_info.get('state', 'unknown')
         
-        # Determine scope based on role
+        # Fetch repository access for this member
+        print(f"🔍 Checking repository access for {username}...")
+        repo_access = fetch_member_repo_access(username)
+        
+        # Determine scope based on role and repo access
         if role == 'admin':
             scope = 'admin:org, repo, workflow, write:packages'
         else:
             scope = 'read:org, repo'
+        
+        # Calculate repository access summary
+        repo_count = len(repo_access)
+        private_repo_count = sum(1 for repo in repo_access if repo['private'])
+        admin_repo_count = sum(1 for repo in repo_access if repo['permission'] in ['admin', 'maintain'])
+        write_repo_count = sum(1 for repo in repo_access if repo['permission'] in ['write', 'admin', 'maintain'])
         
         # Create new token entry
         new_token = {
@@ -97,11 +163,18 @@ def update_token_ledger(members_data):
             'survivability_score': 0.0,  # Will be calculated by scoring bot
             'entity_type': 'user',  # New field to identify this is a user token
             'role': role,  # Store the GitHub role
-            'state': state  # Active/pending status
+            'state': state,  # Active/pending status
+            'repository_access': repo_access,  # Detailed repo access
+            'repo_access_summary': {
+                'total_repos': repo_count,
+                'private_repos': private_repo_count,
+                'admin_repos': admin_repo_count,
+                'write_repos': write_repo_count
+            }
         }
         
         ledger['tokens'].append(new_token)
-        print(f"✅ Added token for {username} (ID: {member_id}, Role: {role})")
+        print(f"✅ Added token for {username} (ID: {member_id}, Role: {role}, Repos: {repo_count}, Private: {private_repo_count}, Admin: {admin_repo_count})")
     
     # Save updated ledger
     LEDGER_PATH.parent.mkdir(parents=True, exist_ok=True)
