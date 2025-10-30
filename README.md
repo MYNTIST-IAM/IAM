@@ -125,12 +125,27 @@ The system includes GitHub Actions workflows that:
 - Send alerts for degrading tokens
 - Trigger auto-healing mechanisms for critical tokens
 
+### Auto-Heal System
+
+The auto-heal system automatically proposes and applies remediations for at-risk tokens:
+
+- **Detection**: `autoheal_detect.yml` runs every 6 hours, identifies candidates, and creates PRs
+- **Review**: PRs include manifests under `ops/autoheal/` for human approval
+- **Enforcement**: `autoheal_apply.yml` applies approved changes via GitHub API on PR merge
+
+**Documentation**:
+- 📚 [`DOCS_INDEX.md`](DOCS_INDEX.md) - **Quick navigation to all documentation**
+- [`README_AUTOHEAL.md`](README_AUTOHEAL.md) - Local testing guide
+- [`ENFORCEMENT_GUIDE.md`](ENFORCEMENT_GUIDE.md) - ⚠️ **Read this before merging auto-heal PRs** - Explains enforcement, shortcomings, and GitHub App migration
+- [`QUICK_REFERENCE.md`](QUICK_REFERENCE.md) - Quick operations guide and emergencies
+
 ## Next Steps
 
-1. **Phase 2**: Implement auto-heal mechanisms (token rotation, scope reduction)
-2. **Phase 3**: Add agent ledger for AI agents
-3. **Phase 4**: Build React dashboard for visualization
-4. **Phase 5**: Add Slack/Teams notifications
+1. ✅ **Phase 2**: Auto-heal mechanisms implemented (token rotation, scope reduction)
+2. 🔄 **Phase 2.5**: Migrate to GitHub App for secure enforcement (see [`ENFORCEMENT_GUIDE.md`](ENFORCEMENT_GUIDE.md))
+3. **Phase 3**: Add agent ledger for AI agents
+4. **Phase 4**: Build React dashboard for visualization
+5. **Phase 5**: Add Slack/Teams notifications
 
 ## Security Notes
 
