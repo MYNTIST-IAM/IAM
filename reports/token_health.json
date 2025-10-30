@@ -2,13 +2,9 @@
   {
     "token_id": "abc123",
     "owner": "user1",
-    "survivability_score": 1.0,
-    "status": "Healthy",
+    "survivability_score": 0.3,
+    "status": "Critical",
     "score_history": [
-      {
-        "timestamp": "2025-10-24T01:53:01.324138",
-        "score": 1.0
-      },
       {
         "timestamp": "2025-10-25T01:54:51.376369",
         "score": 1.0
@@ -32,19 +28,20 @@
       {
         "timestamp": "2025-10-30T02:03:41.347350",
         "score": 1.0
+      },
+      {
+        "timestamp": "2025-10-30T23:20:00.224954",
+        "score": 0.3
       }
-    ]
+    ],
+    "role": "ci_cd"
   },
   {
     "token_id": "def456",
     "owner": "user2",
-    "survivability_score": 0.5,
-    "status": "Degrading",
+    "survivability_score": 0.15,
+    "status": "Critical",
     "score_history": [
-      {
-        "timestamp": "2025-10-24T01:53:01.324155",
-        "score": 0.5
-      },
       {
         "timestamp": "2025-10-25T01:54:51.376381",
         "score": 0.5
@@ -68,19 +65,20 @@
       {
         "timestamp": "2025-10-30T02:03:41.347365",
         "score": 0.5
+      },
+      {
+        "timestamp": "2025-10-30T23:20:00.224986",
+        "score": 0.15
       }
-    ]
+    ],
+    "role": "ci_cd"
   },
   {
     "token_id": "ghi789",
     "owner": "user3",
-    "survivability_score": 1.0,
-    "status": "Healthy",
+    "survivability_score": 0.3,
+    "status": "Critical",
     "score_history": [
-      {
-        "timestamp": "2025-10-24T01:53:01.324161",
-        "score": 1.0
-      },
       {
         "timestamp": "2025-10-25T01:54:51.376388",
         "score": 1.0
@@ -104,19 +102,20 @@
       {
         "timestamp": "2025-10-30T02:03:41.347372",
         "score": 1.0
+      },
+      {
+        "timestamp": "2025-10-30T23:20:00.225009",
+        "score": 0.3
       }
-    ]
+    ],
+    "role": "api_access"
   },
   {
     "token_id": "52085750",
     "owner": "HamzaMasood7",
-    "survivability_score": 0.25,
-    "status": "Critical",
+    "survivability_score": 0.6,
+    "status": "Degrading",
     "score_history": [
-      {
-        "timestamp": "2025-10-24T01:53:01.324167",
-        "score": 0.25
-      },
       {
         "timestamp": "2025-10-25T01:54:51.376393",
         "score": 0.25
@@ -140,19 +139,20 @@
       {
         "timestamp": "2025-10-30T02:03:41.347378",
         "score": 0.25
+      },
+      {
+        "timestamp": "2025-10-30T23:20:00.225028",
+        "score": 0.6
       }
-    ]
+    ],
+    "role": "admin"
   },
   {
     "token_id": "133033842",
     "owner": "hamzaMasood-7",
-    "survivability_score": 0.5,
-    "status": "Degrading",
+    "survivability_score": 0.9,
+    "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-10-24T01:53:01.324172",
-        "score": 0.5
-      },
       {
         "timestamp": "2025-10-25T01:54:51.376398",
         "score": 0.5
@@ -176,19 +176,20 @@
       {
         "timestamp": "2025-10-30T02:03:41.347383",
         "score": 0.5
+      },
+      {
+        "timestamp": "2025-10-30T23:20:00.225046",
+        "score": 0.9
       }
-    ]
+    ],
+    "role": "member"
   },
   {
     "token_id": "115296346",
     "owner": "Muhammad-Usman-cs",
-    "survivability_score": 0.5,
-    "status": "Degrading",
+    "survivability_score": 0.9,
+    "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-10-24T01:53:01.324177",
-        "score": 0.5
-      },
       {
         "timestamp": "2025-10-25T01:54:51.376403",
         "score": 0.5
@@ -212,7 +213,12 @@
       {
         "timestamp": "2025-10-30T02:03:41.347387",
         "score": 0.5
+      },
+      {
+        "timestamp": "2025-10-30T23:20:00.225063",
+        "score": 0.9
       }
-    ]
+    ],
+    "role": "member"
   }
 ]
