@@ -68,3 +68,9 @@
 [2025-10-30 23:20:00] ✅ RECOVERY: Token 133033842 (owner: hamzaMasood-7) has recovered with score 0.9. Token health improved.
 [2025-10-30 23:20:00] ✅ RECOVERY: Token 115296346 (owner: Muhammad-Usman-cs) has recovered with score 0.9. Token health improved.
 [2025-10-30 23:20:00] DIGEST: Total=6, Healthy=2, Degrading=1, Critical=3, AvgScore=0.525
+[2025-10-31 02:00:39] ⚠️ WARNING: Token abc123 (owner: user1) is degrading with score 0.3. Reduced survivability detected.
+[2025-10-31 02:00:39] 🚨 CRITICAL: Token def456 (owner: user2) is in critical state with score 0.15. Immediate action required!
+[2025-10-31 02:00:39] ⚠️ WARNING: Token ghi789 (owner: user3) is degrading with score 0.3. Reduced survivability detected.
+[2025-10-31 02:00:39] ✅ RECOVERY: Token 133033842 (owner: hamzaMasood-7) has recovered with score 0.9. Token health improved.
+[2025-10-31 02:00:39] ✅ RECOVERY: Token 115296346 (owner: Muhammad-Usman-cs) has recovered with score 0.9. Token health improved.
+[2025-10-31 02:00:39] DIGEST: Total=6, Healthy=2, Degrading=1, Critical=3, AvgScore=0.525
