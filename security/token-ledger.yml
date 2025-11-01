@@ -8,26 +8,61 @@ tokens:
   last_used: '2025-05-05'
   audit_trail:
   - event: seed
+  - event: proposed
+    action:
+      type: scope_reduction
+      target_scopes: &id008
+      - read:org
+      - repo
+    reason: unused_days=180
+    before:
+      role: ci_cd
+      state: active
+      scope: read:repo
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-01T02:15:27.913650'
   survivability_score: 0.3
   entity_type: service_account
   role: ci_cd
   state: active
   score_history:
-  - timestamp: '2025-10-27T02:08:11.590873'
+  - &id001
+    timestamp: '2025-10-27T02:08:11.590873'
     score: 1.0
-  - timestamp: '2025-10-28T01:57:34.289574'
+  - &id002
+    timestamp: '2025-10-28T01:57:34.289574'
     score: 1.0
-  - timestamp: '2025-10-29T02:04:46.958009'
+  - &id003
+    timestamp: '2025-10-29T02:04:46.958009'
     score: 1.0
-  - timestamp: '2025-10-30T02:03:41.347350'
+  - &id004
+    timestamp: '2025-10-30T02:03:41.347350'
     score: 1.0
-  - timestamp: '2025-10-30T23:20:00.224954'
+  - &id005
+    timestamp: '2025-10-30T23:20:00.224954'
     score: 0.3
-  - timestamp: '2025-10-31T02:00:39.289742'
+  - &id006
+    timestamp: '2025-10-31T02:00:39.289742'
     score: 0.3
-  - timestamp: '2025-11-01T02:04:03.861851'
+  - &id007
+    timestamp: '2025-11-01T02:04:03.861851'
     score: 0.3
   last_scored: '2025-11-01T02:04:03.861856'
+  pending_action:
+    type: scope_reduction
+    reason: unused_days=180
+    evidence:
+      score_history_tail:
+      - *id001
+      - *id002
+      - *id003
+      - *id004
+      - *id005
+      - *id006
+      - *id007
+    pr_number: null
+    proposed_at: '2025-11-01T02:15:27.910012'
 - token_id: def456
   owner: user2
   scope: repo, workflow
@@ -37,26 +72,59 @@ tokens:
   last_used: '2025-06-06'
   audit_trail:
   - event: seed
+  - event: proposed
+    action:
+      type: scope_reduction
+      target_scopes: *id008
+    reason: critical_count=3 in last 7; unused_days=148
+    before:
+      role: ci_cd
+      state: active
+      scope: repo, workflow
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-01T02:15:27.913656'
   survivability_score: 0.15
   entity_type: service_account
   role: ci_cd
   state: active
   score_history:
-  - timestamp: '2025-10-27T02:08:11.590885'
+  - &id009
+    timestamp: '2025-10-27T02:08:11.590885'
     score: 0.5
-  - timestamp: '2025-10-28T01:57:34.289587'
+  - &id010
+    timestamp: '2025-10-28T01:57:34.289587'
     score: 0.5
-  - timestamp: '2025-10-29T02:04:46.958023'
+  - &id011
+    timestamp: '2025-10-29T02:04:46.958023'
     score: 0.5
-  - timestamp: '2025-10-30T02:03:41.347365'
+  - &id012
+    timestamp: '2025-10-30T02:03:41.347365'
     score: 0.5
-  - timestamp: '2025-10-30T23:20:00.224986'
+  - &id013
+    timestamp: '2025-10-30T23:20:00.224986'
     score: 0.15
-  - timestamp: '2025-10-31T02:00:39.289781'
+  - &id014
+    timestamp: '2025-10-31T02:00:39.289781'
     score: 0.15
-  - timestamp: '2025-11-01T02:04:03.861885'
+  - &id015
+    timestamp: '2025-11-01T02:04:03.861885'
     score: 0.15
   last_scored: '2025-11-01T02:04:03.861888'
+  pending_action:
+    type: scope_reduction
+    reason: critical_count=3 in last 7; unused_days=148
+    evidence:
+      score_history_tail:
+      - *id009
+      - *id010
+      - *id011
+      - *id012
+      - *id013
+      - *id014
+      - *id015
+    pr_number: null
+    proposed_at: '2025-11-01T02:15:27.910792'
 - token_id: ghi789
   owner: user3
   scope: admin:org
@@ -66,26 +134,59 @@ tokens:
   last_used: '2025-07-07'
   audit_trail:
   - event: seed
+  - event: proposed
+    action:
+      type: scope_reduction
+      target_scopes: *id008
+    reason: unused_days=117
+    before:
+      role: api_access
+      state: active
+      scope: admin:org
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-01T02:15:27.913660'
   survivability_score: 0.3
   entity_type: service_account
   role: api_access
   state: active
   score_history:
-  - timestamp: '2025-10-27T02:08:11.590890'
+  - &id016
+    timestamp: '2025-10-27T02:08:11.590890'
     score: 1.0
-  - timestamp: '2025-10-28T01:57:34.289593'
+  - &id017
+    timestamp: '2025-10-28T01:57:34.289593'
     score: 1.0
-  - timestamp: '2025-10-29T02:04:46.958029'
+  - &id018
+    timestamp: '2025-10-29T02:04:46.958029'
     score: 1.0
-  - timestamp: '2025-10-30T02:03:41.347372'
+  - &id019
+    timestamp: '2025-10-30T02:03:41.347372'
     score: 1.0
-  - timestamp: '2025-10-30T23:20:00.225009'
+  - &id020
+    timestamp: '2025-10-30T23:20:00.225009'
     score: 0.3
-  - timestamp: '2025-10-31T02:00:39.289804'
+  - &id021
+    timestamp: '2025-10-31T02:00:39.289804'
     score: 0.3
-  - timestamp: '2025-11-01T02:04:03.861908'
+  - &id022
+    timestamp: '2025-11-01T02:04:03.861908'
     score: 0.3
   last_scored: '2025-11-01T02:04:03.861910'
+  pending_action:
+    type: scope_reduction
+    reason: unused_days=117
+    evidence:
+      score_history_tail:
+      - *id016
+      - *id017
+      - *id018
+      - *id019
+      - *id020
+      - *id021
+      - *id022
+    pr_number: null
+    proposed_at: '2025-11-01T02:15:27.911422'
 - token_id: '52085750'
   owner: HamzaMasood7
   scope: admin:org, repo, workflow, write:packages
@@ -96,26 +197,59 @@ tokens:
   audit_trail:
   - org:MYNTIST-IAM
   - role:admin
+  - event: proposed
+    action:
+      type: org_role_change
+      target_role: member
+    reason: unused_days=17
+    before:
+      role: admin
+      state: active
+      scope: admin:org, repo, workflow, write:packages
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-01T02:15:27.913666'
   survivability_score: 0.6
   entity_type: user
   role: admin
   state: active
   score_history:
-  - timestamp: '2025-10-27T02:08:11.590896'
+  - &id023
+    timestamp: '2025-10-27T02:08:11.590896'
     score: 0.25
-  - timestamp: '2025-10-28T01:57:34.289598'
+  - &id024
+    timestamp: '2025-10-28T01:57:34.289598'
     score: 0.25
-  - timestamp: '2025-10-29T02:04:46.958035'
+  - &id025
+    timestamp: '2025-10-29T02:04:46.958035'
     score: 0.25
-  - timestamp: '2025-10-30T02:03:41.347378'
+  - &id026
+    timestamp: '2025-10-30T02:03:41.347378'
     score: 0.25
-  - timestamp: '2025-10-30T23:20:00.225028'
+  - &id027
+    timestamp: '2025-10-30T23:20:00.225028'
     score: 0.6
-  - timestamp: '2025-10-31T02:00:39.289824'
+  - &id028
+    timestamp: '2025-10-31T02:00:39.289824'
     score: 0.6
-  - timestamp: '2025-11-01T02:04:03.861928'
+  - &id029
+    timestamp: '2025-11-01T02:04:03.861928'
     score: 0.6
   last_scored: '2025-11-01T02:04:03.861930'
+  pending_action:
+    type: org_role_change
+    reason: unused_days=17
+    evidence:
+      score_history_tail:
+      - *id023
+      - *id024
+      - *id025
+      - *id026
+      - *id027
+      - *id028
+      - *id029
+    pr_number: null
+    proposed_at: '2025-11-01T02:15:27.912011'
 - token_id: '133033842'
   owner: hamzaMasood-7
   scope: read:org, repo
@@ -126,26 +260,58 @@ tokens:
   audit_trail:
   - org:MYNTIST-IAM
   - role:member
+  - event: proposed
+    action:
+      type: revoke_org_access
+    reason: unused_days=17
+    before:
+      role: member
+      state: active
+      scope: read:org, repo
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-01T02:15:27.913670'
   survivability_score: 0.9
   entity_type: user
   role: member
   state: active
   score_history:
-  - timestamp: '2025-10-27T02:08:11.590901'
+  - &id030
+    timestamp: '2025-10-27T02:08:11.590901'
     score: 0.5
-  - timestamp: '2025-10-28T01:57:34.289603'
+  - &id031
+    timestamp: '2025-10-28T01:57:34.289603'
     score: 0.5
-  - timestamp: '2025-10-29T02:04:46.958041'
+  - &id032
+    timestamp: '2025-10-29T02:04:46.958041'
     score: 0.5
-  - timestamp: '2025-10-30T02:03:41.347383'
+  - &id033
+    timestamp: '2025-10-30T02:03:41.347383'
     score: 0.5
-  - timestamp: '2025-10-30T23:20:00.225046'
+  - &id034
+    timestamp: '2025-10-30T23:20:00.225046'
     score: 0.9
-  - timestamp: '2025-10-31T02:00:39.289844'
+  - &id035
+    timestamp: '2025-10-31T02:00:39.289844'
     score: 0.9
-  - timestamp: '2025-11-01T02:04:03.861946'
+  - &id036
+    timestamp: '2025-11-01T02:04:03.861946'
     score: 0.9
   last_scored: '2025-11-01T02:04:03.861948'
+  pending_action:
+    type: revoke_org_access
+    reason: unused_days=17
+    evidence:
+      score_history_tail:
+      - *id030
+      - *id031
+      - *id032
+      - *id033
+      - *id034
+      - *id035
+      - *id036
+    pr_number: null
+    proposed_at: '2025-11-01T02:15:27.912598'
 - token_id: '115296346'
   owner: Muhammad-Usman-cs
   scope: read:org, repo
@@ -156,23 +322,55 @@ tokens:
   audit_trail:
   - org:MYNTIST-IAM
   - role:member
+  - event: proposed
+    action:
+      type: revoke_org_access
+    reason: unused_days=17
+    before:
+      role: member
+      state: active
+      scope: read:org, repo
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-01T02:15:27.913673'
   survivability_score: 0.9
   entity_type: user
   role: member
   state: active
   score_history:
-  - timestamp: '2025-10-27T02:08:11.590906'
+  - &id037
+    timestamp: '2025-10-27T02:08:11.590906'
     score: 0.5
-  - timestamp: '2025-10-28T01:57:34.289608'
+  - &id038
+    timestamp: '2025-10-28T01:57:34.289608'
     score: 0.5
-  - timestamp: '2025-10-29T02:04:46.958046'
+  - &id039
+    timestamp: '2025-10-29T02:04:46.958046'
     score: 0.5
-  - timestamp: '2025-10-30T02:03:41.347387'
+  - &id040
+    timestamp: '2025-10-30T02:03:41.347387'
     score: 0.5
-  - timestamp: '2025-10-30T23:20:00.225063'
+  - &id041
+    timestamp: '2025-10-30T23:20:00.225063'
     score: 0.9
-  - timestamp: '2025-10-31T02:00:39.289862'
+  - &id042
+    timestamp: '2025-10-31T02:00:39.289862'
     score: 0.9
-  - timestamp: '2025-11-01T02:04:03.861964'
+  - &id043
+    timestamp: '2025-11-01T02:04:03.861964'
     score: 0.9
   last_scored: '2025-11-01T02:04:03.861967'
+  pending_action:
+    type: revoke_org_access
+    reason: unused_days=17
+    evidence:
+      score_history_tail:
+      - *id037
+      - *id038
+      - *id039
+      - *id040
+      - *id041
+      - *id042
+      - *id043
+    pr_number: null
+    proposed_at: '2025-11-01T02:15:27.913111'
