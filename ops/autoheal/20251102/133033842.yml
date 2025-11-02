@@ -1,0 +1,12 @@
+token_id: '133033842'
+owner: hamzaMasood-7
+entity_type: user
+current_state:
+  role: admin
+  state: active
+  scope: admin:org, repo, workflow, write:packages
+proposed_action:
+  type: org_role_change
+  target_role: member
+reason: score=0.3<0.5; role=admin
+proposed_at: '2025-11-02T21:13:42.300399'
