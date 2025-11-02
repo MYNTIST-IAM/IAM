@@ -6,6 +6,7 @@ current_state:
   state: active
   scope: read:org, repo
 proposed_action:
-  type: revoke_org_access
+  type: org_role_change
+  target_role: member
 reason: unused_days=18
-proposed_at: '2025-11-02T12:31:27.452663'
+proposed_at: '2025-11-02T12:42:19.962556'
