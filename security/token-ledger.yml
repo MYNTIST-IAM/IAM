@@ -62,8 +62,6 @@ tokens:
   role: admin
   state: active
   score_history:
-  - timestamp: '2025-10-29T18:46:02.553217'
-    score: 0.35
   - timestamp: '2025-10-30T18:46:02.553217'
     score: 0.35
   - timestamp: '2025-10-31T18:46:02.553217'
@@ -76,7 +74,9 @@ tokens:
     score: 0.6
   - timestamp: '2025-11-02T19:14:25.995992'
     score: 0.6
-  last_scored: '2025-11-02T19:14:25.995998'
+  - timestamp: '2025-11-02T19:26:01.386533'
+    score: 0.6
+  last_scored: '2025-11-02T19:26:01.386538'
 - token_id: '133033842'
   owner: hamzaMasood-7
   scope: read:org, repo
@@ -170,13 +170,11 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T18:46:07.854885'
-  survivability_score: 0.4
+  survivability_score: 0.9
   entity_type: user
   role: member
   state: active
   score_history:
-  - timestamp: '2025-10-29T18:39:55.913804'
-    score: 0.9
   - timestamp: '2025-10-30T18:39:55.913804'
     score: 0.15
   - timestamp: '2025-10-31T18:39:55.913804'
@@ -189,7 +187,9 @@ tokens:
     score: 0.9
   - timestamp: '2025-11-02T19:14:25.996027'
     score: 0.4
-  last_scored: '2025-11-02T19:14:25.996029'
+  - timestamp: '2025-11-02T19:26:01.386571'
+    score: 0.9
+  last_scored: '2025-11-02T19:26:01.386574'
 - token_id: '115296346'
   owner: Muhammad-Usman-cs
   scope: read:org, repo
@@ -238,8 +238,6 @@ tokens:
   role: member
   state: active
   score_history:
-  - timestamp: '2025-10-30T23:20:00.225063'
-    score: 0.9
   - timestamp: '2025-10-31T02:00:39.289862'
     score: 0.9
   - timestamp: '2025-11-01T02:04:03.861964'
@@ -252,4 +250,6 @@ tokens:
     score: 0.9
   - timestamp: '2025-11-02T19:14:25.996048'
     score: 0.9
-  last_scored: '2025-11-02T19:14:25.996050'
+  - timestamp: '2025-11-02T19:26:01.386594'
+    score: 0.9
+  last_scored: '2025-11-02T19:26:01.386596'

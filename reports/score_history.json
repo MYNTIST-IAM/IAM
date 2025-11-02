@@ -6,10 +6,6 @@
     "status": "Degrading",
     "score_history": [
       {
-        "timestamp": "2025-10-29T18:46:02.553217",
-        "score": 0.35
-      },
-      {
         "timestamp": "2025-10-30T18:46:02.553217",
         "score": 0.35
       },
@@ -32,6 +28,10 @@
       {
         "timestamp": "2025-11-02T19:14:25.995992",
         "score": 0.6
+      },
+      {
+        "timestamp": "2025-11-02T19:26:01.386533",
+        "score": 0.6
       }
     ],
     "role": "admin"
@@ -42,10 +42,6 @@
     "survivability_score": 0.9,
     "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-10-29T18:39:55.913804",
-        "score": 0.9
-      },
       {
         "timestamp": "2025-10-30T18:39:55.913804",
         "score": 0.15
@@ -68,6 +64,10 @@
       },
       {
         "timestamp": "2025-11-02T19:14:25.996027",
+        "score": 0.4
+      },
+      {
+        "timestamp": "2025-11-02T19:26:01.386571",
         "score": 0.9
       }
     ],
@@ -79,10 +79,6 @@
     "survivability_score": 0.9,
     "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-10-30T23:20:00.225063",
-        "score": 0.9
-      },
       {
         "timestamp": "2025-10-31T02:00:39.289862",
         "score": 0.9
@@ -105,6 +101,10 @@
       },
       {
         "timestamp": "2025-11-02T19:14:25.996048",
+        "score": 0.9
+      },
+      {
+        "timestamp": "2025-11-02T19:26:01.386594",
         "score": 0.9
       }
     ],
