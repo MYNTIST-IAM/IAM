@@ -29,33 +29,21 @@ def parse_iso8601(ts: str) -> datetime:
 
 
 def is_candidate(token: dict, policy: dict, scores: list) -> tuple[bool, str]:
-    acceptance = policy.get("acceptance", {})
-    last_n = acceptance.get("last_n", 7)
-    min_critical = acceptance.get("min_critical_count_in_last_n", 3)
-    max_drop_24h = acceptance.get("max_drop_24h", 0.4)
-    min_days_since_last_used = acceptance.get("min_days_since_last_used", 14)
+    """
+    Simplified score-based candidate detection.
+    - Score >= 0.5: No action (not a candidate)
+    - Score >= 0.2 and < 0.5: Candidate (downgrade admin/owner to member)
+    - Score < 0.2: Candidate (revoke org access)
+    """
+    # Get risk thresholds from policy
+    risk = policy.get("risk", {})
+    critical_threshold = risk.get("critical_threshold", 0.2)
+    warning_threshold = risk.get("warning_threshold", 0.5)
 
-    # recent scores
-    recent = scores[-last_n:] if scores else []
-    critical_threshold = policy.get("risk", {}).get("critical_threshold", 0.2)
-    critical_count = sum(1 for s in recent if s < critical_threshold)
-
-    reasons = []
-    if critical_count >= min_critical:
-        reasons.append(f"critical_count={critical_count} in last {last_n}")
-
-    # drop in 24h
-    if len(recent) >= 2:
-        drop = recent[-2] - recent[-1]
-        if drop >= max_drop_24h:
-            reasons.append(f"drop_24h={round(drop,3)}")
-
-    # last used
-    last_used_str = token.get("last_used")
-    if last_used_str:
-        delta_days = (datetime.now() - parse_iso8601(last_used_str)).days
-        if delta_days >= min_days_since_last_used:
-            reasons.append(f"unused_days={delta_days}")
+    # Get current score
+    current_score = token.get("survivability_score", 1.0)
+    if not isinstance(current_score, (int, float)):
+        current_score = 1.0
 
     # exemptions
     ex_users = set(policy.get("exemptions", {}).get("users", []))
@@ -63,17 +51,66 @@ def is_candidate(token: dict, policy: dict, scores: list) -> tuple[bool, str]:
     if token.get("owner") in ex_users or str(token.get("token_id")) in ex_tokens:
         return False, "exempted"
 
-    if reasons:
-        return True, "; ".join(reasons)
+    # Score >= 0.5: No action needed
+    if current_score >= warning_threshold:
+        return False, f"score_above_threshold={round(current_score,3)}>=0.5"
+
+    # Score < 0.2: Critical - revoke access
+    if current_score < critical_threshold:
+        return True, f"score={round(current_score,3)}<0.2"
+
+    # Score >= 0.2 and < 0.5: Warning - downgrade admin/owner to member, or reduce scope for members
+    if current_score >= critical_threshold and current_score < warning_threshold:
+        role = token.get("role", "member")
+        # Flag if role is admin/owner (downgrade to member) OR if already member (reduce scope)
+        if role in ["admin", "owner"]:
+            return True, f"score={round(current_score,3)}<0.5; role={role}"
+        else:
+            # Already member, but score is low - reduce scope (scope_reduction)
+            return True, f"score={round(current_score,3)}<0.5; role={role} (scope_reduction)"
+
     return False, ""
 
 
 def propose_action(token: dict, policy: dict) -> dict:
+    """
+    Propose action based on score:
+    - Score < 0.2: revoke_org_access
+    - Score >= 0.2 and < 0.5: if admin/owner, change to member
+    """
     entity = token.get("entity_type", "service_account")
     role = token.get("role", "member")
-
-    actions_cfg = policy.get("actions", {})
+    
+    # Get current score
+    current_score = token.get("survivability_score", 1.0)
+    if not isinstance(current_score, (int, float)):
+        current_score = 1.0
+    
+    # Get thresholds
+    risk = policy.get("risk", {})
+    critical_threshold = risk.get("critical_threshold", 0.2)
+    warning_threshold = risk.get("warning_threshold", 0.5)
+    
     if entity == "user":
+        # Score < 0.2: Always revoke access
+        if current_score < critical_threshold:
+            return {"type": "revoke_org_access"}
+        
+        # Score >= 0.2 and < 0.5: 
+        # - If admin/owner: downgrade to member
+        # - If already member: reduce scope (scope_reduction)
+        if current_score >= critical_threshold and current_score < warning_threshold:
+            if role in ["admin", "owner"]:
+                return {"type": "org_role_change", "target_role": "member"}
+            else:
+                # Already member, but score is low - reduce scope instead of revoke
+                sa_cfg = policy.get("actions", {}).get("service_account", {}).get("default", {})
+                target_scopes = sa_cfg.get("target_scopes", ["read:org", "repo"])
+                return {"type": "scope_reduction", "target_scopes": target_scopes}
+        
+        # Score >= 0.5: Should not reach here (filtered by is_candidate)
+        # Fallback to policy default
+        actions_cfg = policy.get("actions", {})
         user_cfg = actions_cfg.get("user", {})
         role_cfg = user_cfg.get(role, user_cfg.get("member", {}))
         action_type = role_cfg.get("primary", "revoke_org_access")
@@ -82,7 +119,8 @@ def propose_action(token: dict, policy: dict) -> dict:
             manifest["target_role"] = role_cfg.get("target_role", "member")
         return manifest
     else:
-        sa_cfg = actions_cfg.get("service_account", {}).get("default", {})
+        # Service account: use scope reduction
+        sa_cfg = policy.get("actions", {}).get("service_account", {}).get("default", {})
         action_type = sa_cfg.get("primary", "scope_reduction")
         manifest = {"type": action_type}
         if action_type == "scope_reduction":
@@ -107,25 +145,30 @@ def build_manifest(token: dict, reason: str, policy: dict) -> dict:
     
     # For scope_reduction, include target repos if available in token metadata
     if manifest["proposed_action"].get("type") == "scope_reduction":
-        repos = token.get("repos", [])
-        if repos:
-            manifest["targets"] = {"repos": repos}
+        # Extract repo names from repository_access
+        repo_access = token.get("repository_access", [])
+        if repo_access:
+            # Get org name from audit_trail
+            org_name = "MYNTIST-IAM"  # Default
+            audit_trail = token.get("audit_trail", [])
+            for entry in audit_trail:
+                if isinstance(entry, str) and entry.startswith("org:"):
+                    org_name = entry.split(":")[1]
+                    break
+            
+            # Format repos as "org/repo"
+            repos = [f"{org_name}/{repo['name']}" for repo in repo_access if isinstance(repo, dict) and 'name' in repo]
+            if repos:
+                manifest["targets"] = {"repos": repos}
     
     return manifest
 
 
-def update_ledger_with_proposal(ledger: dict, token_id: str, manifest: dict, pr_number: int | None):
+def update_ledger_with_audit(ledger: dict, token_id: str, manifest: dict, pr_number: int | None):
+    """Update ledger with audit trail only - pending_action should NOT be in ledger"""
     for t in ledger.get("tokens", []):
         if str(t.get("token_id")) == str(token_id):
-            t["pending_action"] = {
-                "type": manifest["proposed_action"]["type"],
-                "reason": manifest["reason"],
-                "evidence": {
-                    "score_history_tail": t.get("score_history", [])[-7:],
-                },
-                "pr_number": pr_number,
-                "proposed_at": manifest["proposed_at"],
-            }
+            # Only add to audit trail, NOT pending_action
             audit_entry = {
                 "event": "proposed",
                 "action": manifest["proposed_action"],
@@ -191,9 +234,15 @@ def main():
         save_yaml(manifest_path, manifest)
         manifests.append((token, manifest_path, manifest))
 
-    # Update ledger with proposals (PR number unknown yet; set to None)
+    # Update ledger with audit trail only (pending_action stays in manifest files only)
     for token, manifest_path, manifest in manifests:
-        update_ledger_with_proposal(ledger, token["token_id"], manifest, pr_number=None)
+        update_ledger_with_audit(ledger, token["token_id"], manifest, pr_number=None)
+    
+    # Clean up any existing pending_action entries from previous runs
+    # pending_action should only exist in manifest files, not in ledger
+    for token in ledger.get("tokens", []):
+        if "pending_action" in token:
+            del token["pending_action"]
 
     save_yaml(LEDGER_PATH, ledger)
 

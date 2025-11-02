@@ -146,7 +146,8 @@ def update_ledger_post_apply(ledger: dict, token_id: str, manifest: dict, apply_
                 "scope": t.get("scope"),
             }
 
-            t["pending_action"] = None
+            # Note: pending_action should NOT be stored in ledger (only in manifest files)
+            # Manifest files are deleted after successful application
 
             trail = t.get("audit_trail", [])
             if not isinstance(trail, list):
@@ -180,12 +181,36 @@ def main():
             continue
 
     approver = os.getenv("GITHUB_ACTOR")
+    applied_count = 0
+    deleted_manifests = []
+    
     for path, manifest in manifests:
         res = apply_manifest(manifest)
-        update_ledger_post_apply(ledger, str(manifest.get("token_id")), manifest, res, approver)
+        
+        # Only update ledger and delete manifest if application was successful
+        if res.get("ok", False):
+            update_ledger_post_apply(ledger, str(manifest.get("token_id")), manifest, res, approver)
+            
+            # Delete manifest file after successful application
+            try:
+                path.unlink()  # Delete the manifest file
+                deleted_manifests.append(str(path))
+                applied_count += 1
+                print(f"✅ Applied and deleted: {path}")
+            except Exception as e:
+                print(f"⚠️  Applied but failed to delete {path}: {e}")
+                applied_count += 1  # Still count as applied
+        else:
+            # Keep manifest file if application failed (for retry)
+            print(f"❌ Failed to apply {path}: {res.get('details', 'unknown error')}")
+            update_ledger_post_apply(ledger, str(manifest.get("token_id")), manifest, res, approver)
 
     save_yaml(LEDGER_PATH, ledger)
-    print(json.dumps({"applied": len(manifests)}, indent=2))
+    print(json.dumps({
+        "applied": applied_count,
+        "failed": len(manifests) - applied_count,
+        "deleted_manifests": deleted_manifests
+    }, indent=2))
 
 
 if __name__ == "__main__":
