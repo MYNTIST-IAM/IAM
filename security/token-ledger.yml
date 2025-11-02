@@ -8,7 +8,6 @@ tokens:
   last_used: '2025-10-15'
   audit_trail:
   - org:MYNTIST-IAM
-  - role:admin
   - event: proposed
     action:
       type: org_role_change
@@ -57,13 +56,12 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T18:46:07.854867'
-  survivability_score: 0.6
+  - role:admin
+  survivability_score: 1.2
   entity_type: user
   role: admin
   state: active
   score_history:
-  - timestamp: '2025-10-30T18:46:02.553217'
-    score: 0.35
   - timestamp: '2025-10-31T18:46:02.553217'
     score: 0.35
   - timestamp: '2025-11-01T18:46:02.553217'
@@ -76,17 +74,32 @@ tokens:
     score: 0.6
   - timestamp: '2025-11-02T19:26:01.386533'
     score: 0.6
-  last_scored: '2025-11-02T19:26:01.386538'
+  - timestamp: '2025-11-02T19:36:24.098666'
+    score: 1.2
+  last_scored: '2025-11-02T19:36:24.098671'
+  repository_access:
+  - repo_id: 1073211015
+    repo_name: IAM
+    permission: admin
+    private: false
+  - repo_id: 1086121705
+    repo_name: Testing
+    permission: admin
+    private: true
+  repo_access_summary:
+    total_repos: 2
+    private_repos: 1
+    admin_repos: 2
+    write_repos: 2
 - token_id: '133033842'
   owner: hamzaMasood-7
-  scope: read:org, repo
+  scope: admin:org, repo, workflow, write:packages
   usage: GitHub Organization Access
   issued_on: '2025-10-15'
   expiry: N/A
   last_used: '2025-10-15'
   audit_trail:
   - org:MYNTIST-IAM
-  - role:member
   - event: proposed
     action:
       type: revoke_org_access
@@ -170,13 +183,12 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T18:46:07.854885'
-  survivability_score: 0.9
+  - role:admin
+  survivability_score: 1.2
   entity_type: user
-  role: member
+  role: admin
   state: active
   score_history:
-  - timestamp: '2025-10-30T18:39:55.913804'
-    score: 0.15
   - timestamp: '2025-10-31T18:39:55.913804'
     score: 0.15
   - timestamp: '2025-11-01T18:39:55.913804'
@@ -189,17 +201,32 @@ tokens:
     score: 0.4
   - timestamp: '2025-11-02T19:26:01.386571'
     score: 0.9
-  last_scored: '2025-11-02T19:26:01.386574'
+  - timestamp: '2025-11-02T19:36:24.098704'
+    score: 1.2
+  last_scored: '2025-11-02T19:36:24.098707'
+  repository_access:
+  - repo_id: 1073211015
+    repo_name: IAM
+    permission: admin
+    private: false
+  - repo_id: 1086121705
+    repo_name: Testing
+    permission: admin
+    private: true
+  repo_access_summary:
+    total_repos: 2
+    private_repos: 1
+    admin_repos: 2
+    write_repos: 2
 - token_id: '115296346'
   owner: Muhammad-Usman-cs
-  scope: read:org, repo
+  scope: admin:org, repo, workflow, write:packages
   usage: GitHub Organization Access
   issued_on: '2025-10-15'
   expiry: N/A
   last_used: '2025-10-15'
   audit_trail:
   - org:MYNTIST-IAM
-  - role:member
   - event: proposed
     action:
       type: revoke_org_access
@@ -233,13 +260,12 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T12:42:19.963746'
-  survivability_score: 0.9
+  - role:admin
+  survivability_score: 1.2
   entity_type: user
-  role: member
+  role: admin
   state: active
   score_history:
-  - timestamp: '2025-10-31T02:00:39.289862'
-    score: 0.9
   - timestamp: '2025-11-01T02:04:03.861964'
     score: 0.9
   - timestamp: '2025-11-02T02:06:58.323315'
@@ -252,4 +278,20 @@ tokens:
     score: 0.9
   - timestamp: '2025-11-02T19:26:01.386594'
     score: 0.9
-  last_scored: '2025-11-02T19:26:01.386596'
+  - timestamp: '2025-11-02T19:36:24.098728'
+    score: 1.2
+  last_scored: '2025-11-02T19:36:24.098731'
+  repository_access:
+  - repo_id: 1073211015
+    repo_name: IAM
+    permission: admin
+    private: false
+  - repo_id: 1086121705
+    repo_name: Testing
+    permission: admin
+    private: true
+  repo_access_summary:
+    total_repos: 2
+    private_repos: 1
+    admin_repos: 2
+    write_repos: 2
