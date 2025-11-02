@@ -56,7 +56,7 @@ def get_status_emoji(status):
     if status == "Healthy":
         return "✅"
     elif status == "Degrading":
-        return "⚠️"
+        return "⚠️"  # Warning sign for degrading/warning status
     else:  # Critical
         return "🚨"
 

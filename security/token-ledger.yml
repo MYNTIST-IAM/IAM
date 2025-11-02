@@ -14,10 +14,6 @@ tokens:
   role: admin
   state: active
   score_history:
-  - timestamp: '2025-11-01T18:46:02.553217'
-    score: 0.35
-  - timestamp: '2025-11-02T18:46:02.553217'
-    score: 0.35
   - timestamp: '2025-11-02T18:47:13.845899'
     score: 0.6
   - timestamp: '2025-11-02T19:14:25.995992'
@@ -28,7 +24,11 @@ tokens:
     score: 1.2
   - timestamp: '2025-11-03T00:45:38.017975'
     score: 1.0
-  last_scored: '2025-11-03T00:45:38.017985'
+  - timestamp: '2025-11-03T01:12:25.308239'
+    score: 1.0
+  - timestamp: '2025-11-03T01:31:14.427921'
+    score: 1.0
+  last_scored: '2025-11-03T01:31:14.427936'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -87,15 +87,11 @@ tokens:
       role: member
       state: active
       scope: admin:org, repo, workflow, write:packages
-  survivability_score: 0.3
+  survivability_score: 0.9
   entity_type: user
   role: member
   state: active
   score_history:
-  - timestamp: '2025-11-01T18:39:55.913804'
-    score: 0.15
-  - timestamp: '2025-11-02T18:39:55.913804'
-    score: 0.15
   - timestamp: '2025-11-02T18:47:13.845970'
     score: 0.9
   - timestamp: '2025-11-02T19:14:25.996027'
@@ -106,7 +102,11 @@ tokens:
     score: 1.2
   - timestamp: '2025-11-03T00:45:38.018054'
     score: 0.3
-  last_scored: '2025-11-03T00:45:38.018061'
+  - timestamp: '2025-11-03T01:12:25.308307'
+    score: 0.9
+  - timestamp: '2025-11-03T01:31:14.428033'
+    score: 0.9
+  last_scored: '2025-11-03T01:31:14.428043'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -136,10 +136,6 @@ tokens:
   role: admin
   state: active
   score_history:
-  - timestamp: '2025-11-02T02:06:58.323315'
-    score: 0.9
-  - timestamp: '2025-11-02T18:38:57.844346'
-    score: 0.9
   - timestamp: '2025-11-02T18:47:13.846078'
     score: 0.9
   - timestamp: '2025-11-02T19:14:25.996048'
@@ -150,7 +146,11 @@ tokens:
     score: 1.2
   - timestamp: '2025-11-03T00:45:38.018102'
     score: 1.0
-  last_scored: '2025-11-03T00:45:38.018107'
+  - timestamp: '2025-11-03T01:12:25.308348'
+    score: 1.0
+  - timestamp: '2025-11-03T01:31:14.428108'
+    score: 1.0
+  last_scored: '2025-11-03T01:31:14.428119'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
