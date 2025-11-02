@@ -170,7 +170,7 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T18:46:07.854885'
-  survivability_score: 0.9
+  survivability_score: 0.4
   entity_type: user
   role: member
   state: active
@@ -188,7 +188,7 @@ tokens:
   - timestamp: '2025-11-02T18:47:13.845970'
     score: 0.9
   - timestamp: '2025-11-02T19:14:25.996027'
-    score: 0.9
+    score: 0.4
   last_scored: '2025-11-02T19:14:25.996029'
 - token_id: '115296346'
   owner: Muhammad-Usman-cs
