@@ -14,8 +14,6 @@ tokens:
   role: admin
   state: active
   score_history:
-  - timestamp: '2025-11-02T18:47:13.845899'
-    score: 0.6
   - timestamp: '2025-11-02T19:14:25.995992'
     score: 0.6
   - timestamp: '2025-11-02T19:26:01.386533'
@@ -28,7 +26,9 @@ tokens:
     score: 1.0
   - timestamp: '2025-11-03T01:31:14.427921'
     score: 1.0
-  last_scored: '2025-11-03T01:31:14.427936'
+  - timestamp: '2025-11-02T21:06:22.960630'
+    score: 1.0
+  last_scored: '2025-11-02T21:06:22.960634'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -69,7 +69,6 @@ tokens:
       role: member
       state: active
       scope: read:org, repo
-  - role:admin
   - event: applied
     action:
       type: org_role_change
@@ -87,13 +86,12 @@ tokens:
       role: member
       state: active
       scope: admin:org, repo, workflow, write:packages
-  survivability_score: 0.9
+  - role:admin
+  survivability_score: 1.0
   entity_type: user
-  role: member
+  role: admin
   state: active
   score_history:
-  - timestamp: '2025-11-02T18:47:13.845970'
-    score: 0.9
   - timestamp: '2025-11-02T19:14:25.996027'
     score: 0.4
   - timestamp: '2025-11-02T19:26:01.386571'
@@ -106,7 +104,9 @@ tokens:
     score: 0.9
   - timestamp: '2025-11-03T01:31:14.428033'
     score: 0.9
-  last_scored: '2025-11-03T01:31:14.428043'
+  - timestamp: '2025-11-02T21:06:22.960661'
+    score: 1.0
+  last_scored: '2025-11-02T21:06:22.960664'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -136,8 +136,6 @@ tokens:
   role: admin
   state: active
   score_history:
-  - timestamp: '2025-11-02T18:47:13.846078'
-    score: 0.9
   - timestamp: '2025-11-02T19:14:25.996048'
     score: 0.9
   - timestamp: '2025-11-02T19:26:01.386594'
@@ -150,7 +148,9 @@ tokens:
     score: 1.0
   - timestamp: '2025-11-03T01:31:14.428108'
     score: 1.0
-  last_scored: '2025-11-03T01:31:14.428119'
+  - timestamp: '2025-11-02T21:06:22.960679'
+    score: 1.0
+  last_scored: '2025-11-02T21:06:22.960681'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
