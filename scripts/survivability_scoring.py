@@ -9,6 +9,7 @@ LEDGER_PATH = Path("security/token-ledger.yml")
 REPORT_JSON = Path("reports/token_health.json")
 REPORT_MD = Path("reports/token_health_report.md")
 HISTORY_JSON = Path("reports/score_history.json")
+DASHBOARD_PUBLIC = Path("dashboard/public")
 MAX_HISTORY_ENTRIES = 7  # Keep last 7 entries for weekly trend graph
 
 # --- Utility functions ---
@@ -88,12 +89,13 @@ def calculate_score(scope, used, drift, audit, token_data=None):
 
 
 def get_status(score):
+    """Get status based on score thresholds"""
     if score >= 0.8:
         return "Healthy"
-    elif score >= 0.5:
-        return "Degrading"
+    elif score >= 0.2:
+        return "Degrading"  # 0.2 to 0.8 is degrading/warning range
     else:
-        return "Critical"
+        return "Critical"  # < 0.2 is critical
 
 
 def update_score_history(token_id, new_score, existing_history):
@@ -187,6 +189,18 @@ with open(REPORT_JSON, "w") as f:
 # --- Write score history JSON (for graphing) ---
 with open(HISTORY_JSON, "w") as f:
     json.dump(results, f, indent=2)
+
+# --- Copy JSON files to dashboard/public for React app ---
+if DASHBOARD_PUBLIC.exists():
+    DASHBOARD_PUBLIC.mkdir(parents=True, exist_ok=True)
+    # Copy token_health.json
+    import shutil
+    dashboard_health = DASHBOARD_PUBLIC / "token_health.json"
+    shutil.copy2(REPORT_JSON, dashboard_health)
+    # Copy score_history.json
+    dashboard_history = DASHBOARD_PUBLIC / "score_history.json"
+    shutil.copy2(HISTORY_JSON, dashboard_history)
+    print("✅ Copied JSON files to dashboard/public/")
 
 # --- Write Markdown report ---
 with open(REPORT_MD, "w") as f:

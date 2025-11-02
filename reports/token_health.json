@@ -6,14 +6,6 @@
     "status": "Healthy",
     "score_history": [
       {
-        "timestamp": "2025-11-01T18:46:02.553217",
-        "score": 0.35
-      },
-      {
-        "timestamp": "2025-11-02T18:46:02.553217",
-        "score": 0.35
-      },
-      {
         "timestamp": "2025-11-02T18:47:13.845899",
         "score": 0.6
       },
@@ -32,6 +24,14 @@
       {
         "timestamp": "2025-11-03T00:45:38.017975",
         "score": 1.0
+      },
+      {
+        "timestamp": "2025-11-03T01:12:25.308239",
+        "score": 1.0
+      },
+      {
+        "timestamp": "2025-11-03T01:31:14.427921",
+        "score": 1.0
       }
     ],
     "repo_access": {
@@ -45,17 +45,9 @@
   {
     "token_id": "133033842",
     "owner": "hamzaMasood-7",
-    "survivability_score": 0.3,
-    "status": "Critical",
+    "survivability_score": 0.9,
+    "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-11-01T18:39:55.913804",
-        "score": 0.15
-      },
-      {
-        "timestamp": "2025-11-02T18:39:55.913804",
-        "score": 0.15
-      },
       {
         "timestamp": "2025-11-02T18:47:13.845970",
         "score": 0.9
@@ -75,6 +67,14 @@
       {
         "timestamp": "2025-11-03T00:45:38.018054",
         "score": 0.3
+      },
+      {
+        "timestamp": "2025-11-03T01:12:25.308307",
+        "score": 0.9
+      },
+      {
+        "timestamp": "2025-11-03T01:31:14.428033",
+        "score": 0.9
       }
     ],
     "repo_access": {
@@ -83,7 +83,7 @@
       "admin_repos": 2,
       "write_repos": 2
     },
-    "role": "admin"
+    "role": "member"
   },
   {
     "token_id": "115296346",
@@ -91,14 +91,6 @@
     "survivability_score": 1.0,
     "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-11-02T02:06:58.323315",
-        "score": 0.9
-      },
-      {
-        "timestamp": "2025-11-02T18:38:57.844346",
-        "score": 0.9
-      },
       {
         "timestamp": "2025-11-02T18:47:13.846078",
         "score": 0.9
@@ -117,6 +109,14 @@
       },
       {
         "timestamp": "2025-11-03T00:45:38.018102",
+        "score": 1.0
+      },
+      {
+        "timestamp": "2025-11-03T01:12:25.308348",
+        "score": 1.0
+      },
+      {
+        "timestamp": "2025-11-03T01:31:14.428108",
         "score": 1.0
       }
     ],
