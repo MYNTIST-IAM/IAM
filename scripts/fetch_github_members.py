@@ -112,20 +112,12 @@ def update_token_ledger(members_data):
     else:
         ledger = {'tokens': []}
     
-    # Get existing token IDs
-    existing_token_ids = {token['token_id'] for token in ledger['tokens']}
-    
     # Process each member
     for member in members_data:
         username = member['login']
         member_id = str(member['id'])
         
-        # Skip if token already exists
-        if member_id in existing_token_ids:
-            print(f"⏭️  Token for {username} (ID: {member_id}) already exists")
-            continue
-        
-        # Fetch member role
+        # Fetch member role (always fetch latest from GitHub)
         membership_info = fetch_member_role(username)
         
         if not membership_info:
@@ -139,7 +131,9 @@ def update_token_ledger(members_data):
         repo_access = fetch_member_repo_access(username)
         
         # Determine scope based on role and repo access
-        if role == 'admin':
+        # Note: GitHub API returns 'admin' for organization admins and 'direct_member' for regular members
+        # Owner role is typically the organization owner (only one owner per org)
+        if role in ['admin', 'owner']:
             scope = 'admin:org, repo, workflow, write:packages'
         else:
             scope = 'read:org, repo'
@@ -150,31 +144,68 @@ def update_token_ledger(members_data):
         admin_repo_count = sum(1 for repo in repo_access if repo['permission'] in ['admin', 'maintain'])
         write_repo_count = sum(1 for repo in repo_access if repo['permission'] in ['write', 'admin', 'maintain'])
         
-        # Create new token entry
-        new_token = {
-            'token_id': member_id,
-            'owner': username,
-            'scope': scope,
-            'usage': 'GitHub Organization Access',
-            'issued_on': datetime.now().strftime('%Y-%m-%d'),
-            'expiry': 'N/A',  # GitHub user tokens don't expire
-            'last_used': datetime.now().strftime('%Y-%m-%d'),
-            'audit_trail': [f"org:{GITHUB_ORG_NAME}", f"role:{role}"],
-            'survivability_score': 0.0,  # Will be calculated by scoring bot
-            'entity_type': 'user',  # New field to identify this is a user token
-            'role': role,  # Store the GitHub role
-            'state': state,  # Active/pending status
-            'repository_access': repo_access,  # Detailed repo access
-            'repo_access_summary': {
+        # Check if token already exists
+        existing_token = None
+        for token in ledger['tokens']:
+            if str(token.get('token_id')) == member_id:
+                existing_token = token
+                break
+        
+        if existing_token:
+            # Update existing token with latest role and repo access
+            old_role = existing_token.get('role', 'unknown')
+            existing_token['role'] = role
+            existing_token['state'] = state
+            existing_token['scope'] = scope
+            existing_token['repository_access'] = repo_access
+            existing_token['repo_access_summary'] = {
                 'total_repos': repo_count,
                 'private_repos': private_repo_count,
                 'admin_repos': admin_repo_count,
                 'write_repos': write_repo_count
             }
-        }
-        
-        ledger['tokens'].append(new_token)
-        print(f"✅ Added token for {username} (ID: {member_id}, Role: {role}, Repos: {repo_count}, Private: {private_repo_count}, Admin: {admin_repo_count})")
+            
+            # Update role in audit_trail if it changed
+            audit_trail = existing_token.get('audit_trail', [])
+            if isinstance(audit_trail, list):
+                # Update or add role entry
+                role_entry = f"role:{role}"
+                # Remove old role entry if exists
+                audit_trail = [e for e in audit_trail if not (isinstance(e, str) and e.startswith('role:'))]
+                # Add new role entry
+                audit_trail.append(role_entry)
+                existing_token['audit_trail'] = audit_trail
+            
+            if old_role != role:
+                print(f"🔄 Updated token for {username} (ID: {member_id}): Role changed from {old_role} → {role}, Repos: {repo_count}")
+            else:
+                print(f"🔄 Updated token for {username} (ID: {member_id}): Role: {role}, Repos: {repo_count}")
+        else:
+            # Create new token entry
+            new_token = {
+                'token_id': member_id,
+                'owner': username,
+                'scope': scope,
+                'usage': 'GitHub Organization Access',
+                'issued_on': datetime.now().strftime('%Y-%m-%d'),
+                'expiry': 'N/A',  # GitHub user tokens don't expire
+                'last_used': datetime.now().strftime('%Y-%m-%d'),
+                'audit_trail': [f"org:{GITHUB_ORG_NAME}", f"role:{role}"],
+                'survivability_score': 0.0,  # Will be calculated by scoring bot
+                'entity_type': 'user',  # New field to identify this is a user token
+                'role': role,  # Store the GitHub role
+                'state': state,  # Active/pending status
+                'repository_access': repo_access,  # Detailed repo access
+                'repo_access_summary': {
+                    'total_repos': repo_count,
+                    'private_repos': private_repo_count,
+                    'admin_repos': admin_repo_count,
+                    'write_repos': write_repo_count
+                }
+            }
+            
+            ledger['tokens'].append(new_token)
+            print(f"✅ Added token for {username} (ID: {member_id}, Role: {role}, Repos: {repo_count}, Private: {private_repo_count}, Admin: {admin_repo_count})")
     
     # Save updated ledger
     LEDGER_PATH.parent.mkdir(parents=True, exist_ok=True)

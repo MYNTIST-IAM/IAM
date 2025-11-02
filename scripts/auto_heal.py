@@ -164,30 +164,8 @@ def build_manifest(token: dict, reason: str, policy: dict) -> dict:
     return manifest
 
 
-def update_ledger_with_audit(ledger: dict, token_id: str, manifest: dict, pr_number: int | None):
-    """Update ledger with audit trail only - pending_action should NOT be in ledger"""
-    for t in ledger.get("tokens", []):
-        if str(t.get("token_id")) == str(token_id):
-            # Only add to audit trail, NOT pending_action
-            audit_entry = {
-                "event": "proposed",
-                "action": manifest["proposed_action"],
-                "reason": manifest["reason"],
-                "before": {
-                    "role": t.get("role"),
-                    "state": t.get("state"),
-                    "scope": t.get("scope"),
-                },
-                "pr_number": pr_number,
-                "proposed_by": "auto-heal-bot",
-                "timestamp": datetime.now().isoformat(),
-            }
-            trail = t.get("audit_trail", [])
-            if not isinstance(trail, list):
-                trail = []
-            trail.append(audit_entry)
-            t["audit_trail"] = trail
-            return
+# Note: We no longer add "proposed" events to the ledger
+# Only "applied" events are added by apply_autoheal.py after successful application
 
 
 def main():
@@ -234,15 +212,21 @@ def main():
         save_yaml(manifest_path, manifest)
         manifests.append((token, manifest_path, manifest))
 
-    # Update ledger with audit trail only (pending_action stays in manifest files only)
-    for token, manifest_path, manifest in manifests:
-        update_ledger_with_audit(ledger, token["token_id"], manifest, pr_number=None)
-    
-    # Clean up any existing pending_action entries from previous runs
-    # pending_action should only exist in manifest files, not in ledger
+    # Note: We no longer update the ledger with "proposed" events
+    # Only "applied" events are added by apply_autoheal.py after successful application
+    # Clean up any existing pending_action or proposed events from previous runs
     for token in ledger.get("tokens", []):
         if "pending_action" in token:
             del token["pending_action"]
+        # Remove any "proposed" events from audit_trail
+        audit_trail = token.get("audit_trail", [])
+        if isinstance(audit_trail, list):
+            # Keep only non-dict entries (org:, role:) and applied events
+            cleaned_trail = [
+                entry for entry in audit_trail 
+                if not isinstance(entry, dict) or entry.get("event") != "proposed"
+            ]
+            token["audit_trail"] = cleaned_trail
 
     save_yaml(LEDGER_PATH, ledger)
 
