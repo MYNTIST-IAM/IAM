@@ -86,3 +86,6 @@
 [2025-11-02 02:06:58] ✅ RECOVERY: Token 133033842 (owner: hamzaMasood-7) has recovered with score 0.9. Token health improved.
 [2025-11-02 02:06:58] ✅ RECOVERY: Token 115296346 (owner: Muhammad-Usman-cs) has recovered with score 0.9. Token health improved.
 [2025-11-02 02:06:58] DIGEST: Total=6, Healthy=2, Degrading=1, Critical=3, AvgScore=0.525
+[2025-11-02 19:14:26] ✅ RECOVERY: Token 133033842 (owner: hamzaMasood-7) has recovered with score 0.9. Token health improved.
+[2025-11-02 19:14:26] ✅ RECOVERY: Token 115296346 (owner: Muhammad-Usman-cs) has recovered with score 0.9. Token health improved.
+[2025-11-02 19:14:26] DIGEST: Total=3, Healthy=2, Degrading=1, Critical=0, AvgScore=0.8

@@ -1,147 +1,36 @@
 [
   {
-    "token_id": "abc123",
-    "owner": "user1",
-    "survivability_score": 0.3,
-    "status": "Critical",
-    "score_history": [
-      {
-        "timestamp": "2025-10-28T01:57:34.289574",
-        "score": 1.0
-      },
-      {
-        "timestamp": "2025-10-29T02:04:46.958009",
-        "score": 1.0
-      },
-      {
-        "timestamp": "2025-10-30T02:03:41.347350",
-        "score": 1.0
-      },
-      {
-        "timestamp": "2025-10-30T23:20:00.224954",
-        "score": 0.3
-      },
-      {
-        "timestamp": "2025-10-31T02:00:39.289742",
-        "score": 0.3
-      },
-      {
-        "timestamp": "2025-11-01T02:04:03.861851",
-        "score": 0.3
-      },
-      {
-        "timestamp": "2025-11-02T02:06:58.323203",
-        "score": 0.3
-      }
-    ],
-    "role": "ci_cd"
-  },
-  {
-    "token_id": "def456",
-    "owner": "user2",
-    "survivability_score": 0.15,
-    "status": "Critical",
-    "score_history": [
-      {
-        "timestamp": "2025-10-28T01:57:34.289587",
-        "score": 0.5
-      },
-      {
-        "timestamp": "2025-10-29T02:04:46.958023",
-        "score": 0.5
-      },
-      {
-        "timestamp": "2025-10-30T02:03:41.347365",
-        "score": 0.5
-      },
-      {
-        "timestamp": "2025-10-30T23:20:00.224986",
-        "score": 0.15
-      },
-      {
-        "timestamp": "2025-10-31T02:00:39.289781",
-        "score": 0.15
-      },
-      {
-        "timestamp": "2025-11-01T02:04:03.861885",
-        "score": 0.15
-      },
-      {
-        "timestamp": "2025-11-02T02:06:58.323238",
-        "score": 0.15
-      }
-    ],
-    "role": "ci_cd"
-  },
-  {
-    "token_id": "ghi789",
-    "owner": "user3",
-    "survivability_score": 0.3,
-    "status": "Critical",
-    "score_history": [
-      {
-        "timestamp": "2025-10-28T01:57:34.289593",
-        "score": 1.0
-      },
-      {
-        "timestamp": "2025-10-29T02:04:46.958029",
-        "score": 1.0
-      },
-      {
-        "timestamp": "2025-10-30T02:03:41.347372",
-        "score": 1.0
-      },
-      {
-        "timestamp": "2025-10-30T23:20:00.225009",
-        "score": 0.3
-      },
-      {
-        "timestamp": "2025-10-31T02:00:39.289804",
-        "score": 0.3
-      },
-      {
-        "timestamp": "2025-11-01T02:04:03.861908",
-        "score": 0.3
-      },
-      {
-        "timestamp": "2025-11-02T02:06:58.323259",
-        "score": 0.3
-      }
-    ],
-    "role": "api_access"
-  },
-  {
     "token_id": "52085750",
     "owner": "HamzaMasood7",
     "survivability_score": 0.6,
     "status": "Degrading",
     "score_history": [
       {
-        "timestamp": "2025-10-28T01:57:34.289598",
-        "score": 0.25
+        "timestamp": "2025-10-29T18:46:02.553217",
+        "score": 0.35
       },
       {
-        "timestamp": "2025-10-29T02:04:46.958035",
-        "score": 0.25
+        "timestamp": "2025-10-30T18:46:02.553217",
+        "score": 0.35
       },
       {
-        "timestamp": "2025-10-30T02:03:41.347378",
-        "score": 0.25
+        "timestamp": "2025-10-31T18:46:02.553217",
+        "score": 0.35
       },
       {
-        "timestamp": "2025-10-30T23:20:00.225028",
+        "timestamp": "2025-11-01T18:46:02.553217",
+        "score": 0.35
+      },
+      {
+        "timestamp": "2025-11-02T18:46:02.553217",
+        "score": 0.35
+      },
+      {
+        "timestamp": "2025-11-02T18:47:13.845899",
         "score": 0.6
       },
       {
-        "timestamp": "2025-10-31T02:00:39.289824",
-        "score": 0.6
-      },
-      {
-        "timestamp": "2025-11-01T02:04:03.861928",
-        "score": 0.6
-      },
-      {
-        "timestamp": "2025-11-02T02:06:58.323279",
+        "timestamp": "2025-11-02T19:14:25.995992",
         "score": 0.6
       }
     ],
@@ -154,31 +43,31 @@
     "status": "Healthy",
     "score_history": [
       {
-        "timestamp": "2025-10-28T01:57:34.289603",
-        "score": 0.5
-      },
-      {
-        "timestamp": "2025-10-29T02:04:46.958041",
-        "score": 0.5
-      },
-      {
-        "timestamp": "2025-10-30T02:03:41.347383",
-        "score": 0.5
-      },
-      {
-        "timestamp": "2025-10-30T23:20:00.225046",
+        "timestamp": "2025-10-29T18:39:55.913804",
         "score": 0.9
       },
       {
-        "timestamp": "2025-10-31T02:00:39.289844",
+        "timestamp": "2025-10-30T18:39:55.913804",
+        "score": 0.15
+      },
+      {
+        "timestamp": "2025-10-31T18:39:55.913804",
+        "score": 0.15
+      },
+      {
+        "timestamp": "2025-11-01T18:39:55.913804",
+        "score": 0.15
+      },
+      {
+        "timestamp": "2025-11-02T18:39:55.913804",
+        "score": 0.15
+      },
+      {
+        "timestamp": "2025-11-02T18:47:13.845970",
         "score": 0.9
       },
       {
-        "timestamp": "2025-11-01T02:04:03.861946",
-        "score": 0.9
-      },
-      {
-        "timestamp": "2025-11-02T02:06:58.323297",
+        "timestamp": "2025-11-02T19:14:25.996027",
         "score": 0.9
       }
     ],
@@ -190,18 +79,6 @@
     "survivability_score": 0.9,
     "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-10-28T01:57:34.289608",
-        "score": 0.5
-      },
-      {
-        "timestamp": "2025-10-29T02:04:46.958046",
-        "score": 0.5
-      },
-      {
-        "timestamp": "2025-10-30T02:03:41.347387",
-        "score": 0.5
-      },
       {
         "timestamp": "2025-10-30T23:20:00.225063",
         "score": 0.9
@@ -216,6 +93,18 @@
       },
       {
         "timestamp": "2025-11-02T02:06:58.323315",
+        "score": 0.9
+      },
+      {
+        "timestamp": "2025-11-02T18:38:57.844346",
+        "score": 0.9
+      },
+      {
+        "timestamp": "2025-11-02T18:47:13.846078",
+        "score": 0.9
+      },
+      {
+        "timestamp": "2025-11-02T19:14:25.996048",
         "score": 0.9
       }
     ],
