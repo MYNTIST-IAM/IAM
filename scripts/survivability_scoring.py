@@ -6,8 +6,11 @@ from datetime import datetime
 
 # --- Config paths ---
 LEDGER_PATH = Path("security/token-ledger.yml")
+AGENT_LEDGER_PATH = Path("agents/agent-ledger.yml")
 REPORT_JSON = Path("reports/token_health.json")
 REPORT_MD = Path("reports/token_health_report.md")
+AGENT_REPORT_JSON = Path("reports/agent_health.json")
+AGENT_REPORT_MD = Path("reports/agent_health_report.md")
 HISTORY_JSON = Path("reports/score_history.json")
 MAX_HISTORY_ENTRIES = 7  # Keep last 7 entries for weekly trend graph
 
@@ -210,3 +213,114 @@ with open(REPORT_MD, "w") as f:
 
 print("✅ Survivability scoring complete. Reports generated in /reports/")
 print(f"📊 Score history maintained (max {MAX_HISTORY_ENTRIES} entries per token)")
+
+# --- Agent Scoring ---
+# Load agent ledger and token ledger for reference
+try:
+    if AGENT_LEDGER_PATH.exists():
+        with open(AGENT_LEDGER_PATH, "r") as f:
+            agent_data = yaml.safe_load(f) or {"agents": []}
+    else:
+        agent_data = {"agents": []}
+    
+    # Create token lookup for agent scoring
+    token_lookup = {str(t["token_id"]): t for t in updated_tokens}
+    
+    agent_results = []
+    updated_agents = []
+    
+    # Calculate scores for agents
+    for agent in agent_data.get("agents", []):
+        agent_id = agent.get("agent_id")
+        associated_token_id = str(agent.get("associated_token_id", ""))
+        
+        # Get associated token for context
+        associated_token = token_lookup.get(associated_token_id)
+        
+        # Validate agent has associated token
+        if not associated_token:
+            print(f"⚠️  Warning: Agent {agent_id} has invalid associated_token_id: {associated_token_id}")
+            # Skip scoring but keep agent
+            updated_agents.append(agent)
+            continue
+        
+        # Calculate agent score using interaction_scope
+        interaction_scope = agent.get("interaction_scope", "read:repo")
+        
+        # Create agent_data dict for scoring function (merging agent and token context)
+        agent_scoring_data = {
+            **associated_token,  # Include token context
+            "entity_type": "agent",  # Mark as agent
+            "scope": interaction_scope,  # Use agent's interaction scope
+        }
+        
+        S = calculate_score(
+            interaction_scope,  # Use agent's interaction_scope
+            agent.get("used_permissions", 1),  # Default to 1 if missing
+            agent.get("scope_drift", 0.0),  # Default to 0.0 if missing
+            bool(agent.get("audit_trail", [])),  # Audit trail indicator
+            agent_scoring_data  # Pass merged data for context
+        )
+        
+        status = get_status(S)
+        
+        # Update agent score history (max 7 entries)
+        score_history = update_score_history(
+            agent_id,
+            S,
+            agent.get("score_history", [])
+        )
+        
+        # Update agent with new score and history
+        agent["survivability_score"] = S
+        agent["score_history"] = score_history
+        agent["last_scored"] = datetime.now().isoformat()
+        
+        updated_agents.append(agent)
+        
+        # Prepare result data
+        result_data = {
+            "agent_id": agent_id,
+            "agent_name": agent.get("agent_name"),
+            "associated_token_id": associated_token_id,
+            "survivability_score": S,
+            "status": status,
+            "score_history": score_history,
+            "purpose": agent.get("purpose"),
+            "interaction_scope": interaction_scope
+        }
+        
+        agent_results.append(result_data)
+    
+    # Save updated agent ledger
+    agent_data["agents"] = updated_agents
+    if updated_agents:
+        with open(AGENT_LEDGER_PATH, "w") as f:
+            yaml.dump(agent_data, f, default_flow_style=False, sort_keys=False)
+        print(f"✅ Updated agent ledger with new scores ({len(updated_agents)} agents)")
+    
+    # Write agent health JSON report
+    if agent_results:
+        AGENT_REPORT_JSON.parent.mkdir(parents=True, exist_ok=True)
+        with open(AGENT_REPORT_JSON, "w") as f:
+            json.dump(agent_results, f, indent=2)
+        
+        # Write agent health Markdown report
+        with open(AGENT_REPORT_MD, "w") as f:
+            f.write("# Agent Health Report\n\n")
+            f.write(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}\n\n")
+            f.write("| Agent ID | Agent Name | Associated Token | Score | Status | Scope | Trend (Last 7) |\n")
+            f.write("|----------|------------|------------------|-------|--------|-------|----------------|\n")
+            for r in agent_results:
+                history_scores = [h["score"] for h in r["score_history"]]
+                trend = " → ".join([str(s) for s in history_scores])
+                f.write(f"| {r['agent_id']} | {r['agent_name']} | {r['associated_token_id']} | {r['survivability_score']} | {r['status']} | {r['interaction_scope']} | {trend} |\n")
+        
+        print(f"✅ Agent health reports generated ({len(agent_results)} agents)")
+    else:
+        print("ℹ️  No agents found to score")
+
+except Exception as e:
+    print(f"⚠️  Error processing agents: {e}")
+    import traceback
+    traceback.print_exc()
