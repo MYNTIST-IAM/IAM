@@ -87,7 +87,7 @@ tokens:
       state: active
       scope: admin:org, repo, workflow, write:packages
   - role:admin
-  survivability_score: 1.0
+  survivability_score: 0.3
   entity_type: user
   role: admin
   state: active
@@ -105,7 +105,7 @@ tokens:
   - timestamp: '2025-11-03T01:31:14.428033'
     score: 0.9
   - timestamp: '2025-11-02T21:06:22.960661'
-    score: 1.0
+    score: 0.3
   last_scored: '2025-11-02T21:06:22.960664'
   repository_access:
   - repo_id: 1073211015

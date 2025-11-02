@@ -45,8 +45,8 @@
   {
     "token_id": "133033842",
     "owner": "hamzaMasood-7",
-    "survivability_score": 1.0,
-    "status": "Healthy",
+    "survivability_score": 0.3,
+    "status": "Critical",
     "score_history": [
       {
         "timestamp": "2025-11-02T19:14:25.996027",
@@ -74,7 +74,7 @@
       },
       {
         "timestamp": "2025-11-02T21:06:22.960661",
-        "score": 1.0
+        "score": 0.3
       }
     ],
     "repo_access": {
