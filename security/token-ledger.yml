@@ -170,6 +170,20 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T18:46:07.854885'
+  - event: proposed
+    action:
+      type: scope_reduction
+      target_scopes:
+      - read:org
+      - repo
+    reason: score=0.4<0.5; role=member (scope_reduction)
+    before:
+      role: member
+      state: active
+      scope: read:org, repo
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-02T19:21:56.504748'
   survivability_score: 0.4
   entity_type: user
   role: member
