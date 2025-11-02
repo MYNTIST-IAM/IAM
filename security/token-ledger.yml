@@ -36,6 +36,20 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T12:31:27.453796'
+  - event: proposed
+    action:
+      type: scope_reduction
+      target_scopes: &id010
+      - read:org
+      - repo
+    reason: unused_days=181
+    before:
+      role: ci_cd
+      state: active
+      scope: read:repo
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-02T12:42:19.963720'
   survivability_score: 0.3
   entity_type: service_account
   role: ci_cd
@@ -75,8 +89,8 @@ tokens:
       - *id005
       - *id006
       - *id007
-    pr_number: 19
-    proposed_at: '2025-11-02T02:18:53.086817'
+    pr_number: null
+    proposed_at: '2025-11-02T12:42:19.959949'
 - token_id: def456
   owner: user2
   scope: repo, workflow
@@ -110,30 +124,42 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T12:31:27.453803'
+  - event: proposed
+    action:
+      type: scope_reduction
+      target_scopes: *id010
+    reason: critical_count=4 in last 7; unused_days=149
+    before:
+      role: ci_cd
+      state: active
+      scope: repo, workflow
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-02T12:42:19.963728'
   survivability_score: 0.15
   entity_type: service_account
   role: ci_cd
   state: active
   score_history:
-  - &id010
+  - &id011
     timestamp: '2025-10-28T01:57:34.289587'
     score: 0.5
-  - &id011
+  - &id012
     timestamp: '2025-10-29T02:04:46.958023'
     score: 0.5
-  - &id012
+  - &id013
     timestamp: '2025-10-30T02:03:41.347365'
     score: 0.5
-  - &id013
+  - &id014
     timestamp: '2025-10-30T23:20:00.224986'
     score: 0.15
-  - &id014
+  - &id015
     timestamp: '2025-10-31T02:00:39.289781'
     score: 0.15
-  - &id015
+  - &id016
     timestamp: '2025-11-01T02:04:03.861885'
     score: 0.15
-  - &id016
+  - &id017
     timestamp: '2025-11-02T02:06:58.323238'
     score: 0.15
   last_scored: '2025-11-02T02:06:58.323240'
@@ -142,14 +168,15 @@ tokens:
     reason: critical_count=4 in last 7; unused_days=149
     evidence:
       score_history_tail:
-      - *id010
       - *id011
       - *id012
       - *id013
       - *id014
       - *id015
-    pr_number: 19
-    proposed_at: '2025-11-02T02:18:53.087638'
+      - *id016
+      - *id017
+    pr_number: null
+    proposed_at: '2025-11-02T12:42:19.960761'
 - token_id: ghi789
   owner: user3
   scope: admin:org
@@ -183,30 +210,42 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T12:31:27.453807'
+  - event: proposed
+    action:
+      type: scope_reduction
+      target_scopes: *id010
+    reason: unused_days=118
+    before:
+      role: api_access
+      state: active
+      scope: admin:org
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-02T12:42:19.963732'
   survivability_score: 0.3
   entity_type: service_account
   role: api_access
   state: active
   score_history:
-  - &id017
+  - &id018
     timestamp: '2025-10-28T01:57:34.289593'
     score: 1.0
-  - &id018
+  - &id019
     timestamp: '2025-10-29T02:04:46.958029'
     score: 1.0
-  - &id019
+  - &id020
     timestamp: '2025-10-30T02:03:41.347372'
     score: 1.0
-  - &id020
+  - &id021
     timestamp: '2025-10-30T23:20:00.225009'
     score: 0.3
-  - &id021
+  - &id022
     timestamp: '2025-10-31T02:00:39.289804'
     score: 0.3
-  - &id022
+  - &id023
     timestamp: '2025-11-01T02:04:03.861908'
     score: 0.3
-  - &id023
+  - &id024
     timestamp: '2025-11-02T02:06:58.323259'
     score: 0.3
   last_scored: '2025-11-02T02:06:58.323261'
@@ -215,14 +254,15 @@ tokens:
     reason: unused_days=118
     evidence:
       score_history_tail:
-      - *id017
       - *id018
       - *id019
       - *id020
       - *id021
       - *id022
-    pr_number: 19
-    proposed_at: '2025-11-02T02:18:53.088246'
+      - *id023
+      - *id024
+    pr_number: null
+    proposed_at: '2025-11-02T12:42:19.961394'
 - token_id: '52085750'
   owner: HamzaMasood7
   scope: admin:org, repo, workflow, write:packages
@@ -257,30 +297,42 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T12:31:27.453813'
+  - event: proposed
+    action:
+      type: org_role_change
+      target_role: member
+    reason: unused_days=18
+    before:
+      role: admin
+      state: active
+      scope: admin:org, repo, workflow, write:packages
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-02T12:42:19.963738'
   survivability_score: 0.6
   entity_type: user
   role: admin
   state: active
   score_history:
-  - &id024
+  - &id025
     timestamp: '2025-10-28T01:57:34.289598'
     score: 0.25
-  - &id025
+  - &id026
     timestamp: '2025-10-29T02:04:46.958035'
     score: 0.25
-  - &id026
+  - &id027
     timestamp: '2025-10-30T02:03:41.347378'
     score: 0.25
-  - &id027
+  - &id028
     timestamp: '2025-10-30T23:20:00.225028'
     score: 0.6
-  - &id028
+  - &id029
     timestamp: '2025-10-31T02:00:39.289824'
     score: 0.6
-  - &id029
+  - &id030
     timestamp: '2025-11-01T02:04:03.861928'
     score: 0.6
-  - &id030
+  - &id031
     timestamp: '2025-11-02T02:06:58.323279'
     score: 0.6
   last_scored: '2025-11-02T02:06:58.323281'
@@ -289,14 +341,15 @@ tokens:
     reason: unused_days=18
     evidence:
       score_history_tail:
-      - *id024
       - *id025
       - *id026
       - *id027
       - *id028
       - *id029
-    pr_number: 19
-    proposed_at: '2025-11-02T02:18:53.088845'
+      - *id030
+      - *id031
+    pr_number: null
+    proposed_at: '2025-11-02T12:42:19.961974'
 - token_id: '133033842'
   owner: hamzaMasood-7
   scope: read:org, repo
@@ -329,30 +382,41 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T12:31:27.453818'
+  - event: proposed
+    action:
+      type: revoke_org_access
+    reason: unused_days=18
+    before:
+      role: member
+      state: active
+      scope: read:org, repo
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-02T12:42:19.963742'
   survivability_score: 0.9
   entity_type: user
   role: member
   state: active
   score_history:
-  - &id031
+  - &id032
     timestamp: '2025-10-28T01:57:34.289603'
     score: 0.5
-  - &id032
+  - &id033
     timestamp: '2025-10-29T02:04:46.958041'
     score: 0.5
-  - &id033
+  - &id034
     timestamp: '2025-10-30T02:03:41.347383'
     score: 0.5
-  - &id034
+  - &id035
     timestamp: '2025-10-30T23:20:00.225046'
     score: 0.9
-  - &id035
+  - &id036
     timestamp: '2025-10-31T02:00:39.289844'
     score: 0.9
-  - &id036
+  - &id037
     timestamp: '2025-11-01T02:04:03.861946'
     score: 0.9
-  - &id037
+  - &id038
     timestamp: '2025-11-02T02:06:58.323297'
     score: 0.9
   last_scored: '2025-11-02T02:06:58.323299'
@@ -361,14 +425,15 @@ tokens:
     reason: unused_days=18
     evidence:
       score_history_tail:
-      - *id031
       - *id032
       - *id033
       - *id034
       - *id035
       - *id036
-    pr_number: 19
-    proposed_at: '2025-11-02T02:18:53.089403'
+      - *id037
+      - *id038
+    pr_number: null
+    proposed_at: '2025-11-02T12:42:19.962556'
 - token_id: '115296346'
   owner: Muhammad-Usman-cs
   scope: read:org, repo
@@ -401,30 +466,41 @@ tokens:
     pr_number: null
     proposed_by: auto-heal-bot
     timestamp: '2025-11-02T12:31:27.453821'
+  - event: proposed
+    action:
+      type: revoke_org_access
+    reason: unused_days=18
+    before:
+      role: member
+      state: active
+      scope: read:org, repo
+    pr_number: null
+    proposed_by: auto-heal-bot
+    timestamp: '2025-11-02T12:42:19.963746'
   survivability_score: 0.9
   entity_type: user
   role: member
   state: active
   score_history:
-  - &id038
+  - &id039
     timestamp: '2025-10-28T01:57:34.289608'
     score: 0.5
-  - &id039
+  - &id040
     timestamp: '2025-10-29T02:04:46.958046'
     score: 0.5
-  - &id040
+  - &id041
     timestamp: '2025-10-30T02:03:41.347387'
     score: 0.5
-  - &id041
+  - &id042
     timestamp: '2025-10-30T23:20:00.225063'
     score: 0.9
-  - &id042
+  - &id043
     timestamp: '2025-10-31T02:00:39.289862'
     score: 0.9
-  - &id043
+  - &id044
     timestamp: '2025-11-01T02:04:03.861964'
     score: 0.9
-  - &id044
+  - &id045
     timestamp: '2025-11-02T02:06:58.323315'
     score: 0.9
   last_scored: '2025-11-02T02:06:58.323317'
@@ -433,11 +509,12 @@ tokens:
     reason: unused_days=18
     evidence:
       score_history_tail:
-      - *id038
       - *id039
       - *id040
       - *id041
       - *id042
       - *id043
-    pr_number: 19
-    proposed_at: '2025-11-02T02:18:53.089941'
+      - *id044
+      - *id045
+    pr_number: null
+    proposed_at: '2025-11-02T12:42:19.963138'
