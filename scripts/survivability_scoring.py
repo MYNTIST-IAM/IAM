@@ -80,8 +80,9 @@ def calculate_score(scope, used, drift, audit, token_data=None):
     # Calculate final score
     S = base_score * role_multiplier * repo_multiplier * time_factor * audit_factor
     
-    # Cap the score at 2.0 to prevent unrealistic scores
-    S = min(2.0, S)
+    # Normalize score to 0-1 range
+    # Cap the score at 1.0 (survivability scores should be 0-1)
+    S = min(1.0, max(0.0, S))
     
     return round(S, 3)
 

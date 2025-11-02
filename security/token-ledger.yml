@@ -8,62 +8,12 @@ tokens:
   last_used: '2025-10-15'
   audit_trail:
   - org:MYNTIST-IAM
-  - event: proposed
-    action:
-      type: org_role_change
-      target_role: member
-    reason: unused_days=18
-    before:
-      role: admin
-      state: active
-      scope: admin:org, repo, workflow, write:packages
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T02:18:53.090471'
-  - event: proposed
-    action:
-      type: org_role_change
-      target_role: member
-    reason: unused_days=18
-    before:
-      role: admin
-      state: active
-      scope: admin:org, repo, workflow, write:packages
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T12:31:27.453813'
-  - event: proposed
-    action:
-      type: org_role_change
-      target_role: member
-    reason: unused_days=18
-    before:
-      role: admin
-      state: active
-      scope: admin:org, repo, workflow, write:packages
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T12:42:19.963738'
-  - event: proposed
-    action:
-      type: org_role_change
-      target_role: member
-    reason: score=0.35<0.5; role=admin
-    before:
-      role: admin
-      state: active
-      scope: admin:org, repo, workflow, write:packages
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T18:46:07.854867'
   - role:admin
-  survivability_score: 1.2
+  survivability_score: 1.0
   entity_type: user
   role: admin
   state: active
   score_history:
-  - timestamp: '2025-10-31T18:46:02.553217'
-    score: 0.35
   - timestamp: '2025-11-01T18:46:02.553217'
     score: 0.35
   - timestamp: '2025-11-02T18:46:02.553217'
@@ -76,7 +26,9 @@ tokens:
     score: 0.6
   - timestamp: '2025-11-02T19:36:24.098666'
     score: 1.2
-  last_scored: '2025-11-02T19:36:24.098671'
+  - timestamp: '2025-11-03T00:45:38.017975'
+    score: 1.0
+  last_scored: '2025-11-03T00:45:38.017985'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -100,39 +52,6 @@ tokens:
   last_used: '2025-10-15'
   audit_trail:
   - org:MYNTIST-IAM
-  - event: proposed
-    action:
-      type: revoke_org_access
-    reason: unused_days=18
-    before:
-      role: member
-      state: active
-      scope: read:org, repo
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T02:18:53.090475'
-  - event: proposed
-    action:
-      type: revoke_org_access
-    reason: unused_days=18
-    before:
-      role: member
-      state: active
-      scope: read:org, repo
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T12:31:27.453818'
-  - event: proposed
-    action:
-      type: revoke_org_access
-    reason: unused_days=18
-    before:
-      role: member
-      state: active
-      scope: read:org, repo
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T12:42:19.963742'
   - event: applied
     action:
       type: org_role_change
@@ -150,47 +69,12 @@ tokens:
       role: member
       state: active
       scope: read:org, repo
-  - event: proposed
-    action:
-      type: revoke_org_access
-    reason: score=0.15<0.2; critical_count=4/7; score=0.15<0.2; unused_days=18
-    before:
-      role: member
-      state: active
-      scope: read:org, repo
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T18:40:02.431191'
-  - event: proposed
-    action:
-      type: revoke_org_access
-    reason: score=0.15<0.2
-    before:
-      role: member
-      state: active
-      scope: read:org, repo
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T18:45:13.827147'
-  - event: proposed
-    action:
-      type: revoke_org_access
-    reason: score=0.15<0.2
-    before:
-      role: member
-      state: active
-      scope: read:org, repo
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T18:46:07.854885'
   - role:admin
-  survivability_score: 1.2
+  survivability_score: 0.3
   entity_type: user
   role: admin
   state: active
   score_history:
-  - timestamp: '2025-10-31T18:39:55.913804'
-    score: 0.15
   - timestamp: '2025-11-01T18:39:55.913804'
     score: 0.15
   - timestamp: '2025-11-02T18:39:55.913804'
@@ -203,7 +87,9 @@ tokens:
     score: 0.9
   - timestamp: '2025-11-02T19:36:24.098704'
     score: 1.2
-  last_scored: '2025-11-02T19:36:24.098707'
+  - timestamp: '2025-11-03T00:45:38.018054'
+    score: 0.3
+  last_scored: '2025-11-03T00:45:38.018061'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -227,47 +113,12 @@ tokens:
   last_used: '2025-10-15'
   audit_trail:
   - org:MYNTIST-IAM
-  - event: proposed
-    action:
-      type: revoke_org_access
-    reason: unused_days=18
-    before:
-      role: member
-      state: active
-      scope: read:org, repo
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T02:18:53.090479'
-  - event: proposed
-    action:
-      type: revoke_org_access
-    reason: unused_days=18
-    before:
-      role: member
-      state: active
-      scope: read:org, repo
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T12:31:27.453821'
-  - event: proposed
-    action:
-      type: revoke_org_access
-    reason: unused_days=18
-    before:
-      role: member
-      state: active
-      scope: read:org, repo
-    pr_number: null
-    proposed_by: auto-heal-bot
-    timestamp: '2025-11-02T12:42:19.963746'
   - role:admin
-  survivability_score: 1.2
+  survivability_score: 1.0
   entity_type: user
   role: admin
   state: active
   score_history:
-  - timestamp: '2025-11-01T02:04:03.861964'
-    score: 0.9
   - timestamp: '2025-11-02T02:06:58.323315'
     score: 0.9
   - timestamp: '2025-11-02T18:38:57.844346'
@@ -280,7 +131,9 @@ tokens:
     score: 0.9
   - timestamp: '2025-11-02T19:36:24.098728'
     score: 1.2
-  last_scored: '2025-11-02T19:36:24.098731'
+  - timestamp: '2025-11-03T00:45:38.018102'
+    score: 1.0
+  last_scored: '2025-11-03T00:45:38.018107'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
