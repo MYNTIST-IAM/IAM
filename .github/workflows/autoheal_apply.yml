@@ -41,7 +41,7 @@ jobs:
           python scripts/apply_autoheal.py > apply_output.json
           cat apply_output.json
 
-      - name: Commit ledger updates
+      - name: Commit ledger updates and deleted manifests
         run: |
           git config user.email "bot@users.noreply.github.com"
           git config user.name "auto-heal-bot"
@@ -50,12 +50,15 @@ jobs:
           BRANCH="${{ github.event.pull_request.base.ref || github.ref_name }}"
           git checkout $BRANCH
           git pull origin $BRANCH || true
+          # Stage ledger updates and deleted manifest files
           git add security/token-ledger.yml
+          git add ops/autoheal/ || true  # Stages manifest file deletions
+          # Check if there are any changes to commit
           if git diff --cached --quiet; then
-            echo "No ledger changes"
+            echo "No changes to commit"
             exit 0
           fi
-          git commit -m "autoheal: apply results and audit trail"
+          git commit -m "autoheal: apply results, audit trail, and cleanup manifests"
           git push origin $BRANCH
 
 
