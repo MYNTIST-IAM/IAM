@@ -21,7 +21,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
-        with:
           token: ${{ secrets.PAT_TOKEN }}
       - name: Setup Python
         uses: actions/setup-python@v5
