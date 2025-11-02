@@ -87,9 +87,26 @@ tokens:
       state: active
       scope: admin:org, repo, workflow, write:packages
   - role:admin
+  - event: applied
+    action:
+      type: org_role_change
+      target_role: member
+    result:
+      ok: true
+      details: org role changed to member
+    approved_by: HamzaMasood7
+    timestamp: '2025-11-02T21:15:44.715690'
+    before:
+      role: admin
+      state: active
+      scope: admin:org, repo, workflow, write:packages
+    after:
+      role: member
+      state: active
+      scope: admin:org, repo, workflow, write:packages
   survivability_score: 0.3
   entity_type: user
-  role: admin
+  role: member
   state: active
   score_history:
   - timestamp: '2025-11-02T19:14:25.996027'
