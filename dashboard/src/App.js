@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { 
   Shield, 
   Users, 
-  Activity, 
   TrendingUp, 
   AlertTriangle, 
   CheckCircle, 
