@@ -6,10 +6,6 @@
     "status": "Healthy",
     "score_history": [
       {
-        "timestamp": "2025-11-02T19:14:25.995992",
-        "score": 0.6
-      },
-      {
         "timestamp": "2025-11-02T19:26:01.386533",
         "score": 0.6
       },
@@ -32,6 +28,10 @@
       {
         "timestamp": "2025-11-02T21:06:22.960630",
         "score": 1.0
+      },
+      {
+        "timestamp": "2025-11-03T02:06:05.919369",
+        "score": 1.0
       }
     ],
     "repo_access": {
@@ -45,13 +45,9 @@
   {
     "token_id": "133033842",
     "owner": "hamzaMasood-7",
-    "survivability_score": 0.3,
-    "status": "Critical",
+    "survivability_score": 1.0,
+    "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-11-02T19:14:25.996027",
-        "score": 0.4
-      },
       {
         "timestamp": "2025-11-02T19:26:01.386571",
         "score": 0.9
@@ -75,15 +71,19 @@
       {
         "timestamp": "2025-11-02T21:06:22.960661",
         "score": 0.3
+      },
+      {
+        "timestamp": "2025-11-03T02:06:05.919402",
+        "score": 1.0
       }
     ],
     "repo_access": {
       "total_repos": 2,
       "private_repos": 1,
-      "admin_repos": 2,
-      "write_repos": 2
+      "admin_repos": 0,
+      "write_repos": 0
     },
-    "role": "admin"
+    "role": "member"
   },
   {
     "token_id": "115296346",
@@ -91,10 +91,6 @@
     "survivability_score": 1.0,
     "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-11-02T19:14:25.996048",
-        "score": 0.9
-      },
       {
         "timestamp": "2025-11-02T19:26:01.386594",
         "score": 0.9
@@ -117,6 +113,10 @@
       },
       {
         "timestamp": "2025-11-02T21:06:22.960679",
+        "score": 1.0
+      },
+      {
+        "timestamp": "2025-11-03T02:06:05.919422",
         "score": 1.0
       }
     ],
