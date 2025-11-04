@@ -101,13 +101,31 @@ This generates:
 - `reports/token_health_report.md` - Human-readable markdown report
 - `reports/agent_health.json` - Agent health data in JSON format
 - `reports/agent_health_report.md` - Agent health markdown report
+- `reports/product_health.json` - Product health data (pre-calculated for dashboard)
+- `reports/product_health_report.md` - Product health markdown report
 
-### 6. Validate Agents
+**Note**: Product health is automatically calculated after token/agent scoring using the average of all linked dependency scores.
 
-Validate that all agents have valid token associations:
+### 6. Detect Products from Repositories
+
+Detect and register products from GitHub repositories:
+
+```bash
+python scripts/detect_products.py
+```
+
+This will:
+- Fetch all repositories from your GitHub organization
+- Create product entries for each repository
+- Note: Products require manual linking to agents/tokens
+
+### 7. Validate Agents and Products
+
+Validate that all agents and products have valid associations:
 
 ```bash
 python scripts/validate_agents.py
+python scripts/validate_products.py
 ```
 
 ## Token Ledger Schema
@@ -180,14 +198,26 @@ The system now tracks AI/automated agents that interact with repositories or API
 
 For detailed information, see [`AGENT_LEDGER.md`](AGENT_LEDGER.md).
 
+## Product Ledger (Phase 3)
+
+The system tracks products (apps, APIs, assets) and maps them to agents and tokens:
+
+- **File**: `products/product-ledger.yml`
+- **Registration**: Both manual and automatic (from GitHub repositories)
+- **Health Calculation**: Aggregate health from linked tokens and agents (average)
+- **Status**: Green/Yellow/Red based on aggregate health score
+
+For detailed information, see [`PRODUCT_LEDGER.md`](PRODUCT_LEDGER.md).
+
 ## Next Steps
 
 1. ✅ **Phase 2**: Auto-heal mechanisms implemented (token rotation, scope reduction)
 2. ✅ **Phase 2**: Agent ledger for AI agents
-3. 🔄 **Phase 2.5**: Migrate to GitHub App for secure enforcement (see [`ENFORCEMENT_GUIDE.md`](ENFORCEMENT_GUIDE.md))
-4. **Phase 3**: Enable agent auto-heal detection (currently commented out)
-5. **Phase 4**: Build React dashboard for visualization
-6. **Phase 5**: Add Slack/Teams notifications
+3. ✅ **Phase 3**: Product ledger with aggregate health calculation
+4. 🔄 **Phase 2.5**: Migrate to GitHub App for secure enforcement (see [`ENFORCEMENT_GUIDE.md`](ENFORCEMENT_GUIDE.md))
+5. **Phase 3**: Enable agent auto-heal detection (currently commented out)
+6. **Phase 4**: Build React dashboard for visualization (in progress)
+7. **Phase 5**: Add Slack/Teams notifications
 
 ## Security Notes
 

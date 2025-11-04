@@ -339,3 +339,26 @@ except Exception as e:
     print(f"⚠️  Error processing agents: {e}")
     import traceback
     traceback.print_exc()
+
+# --- Product Health Calculation ---
+# Calculate aggregate health for products after token/agent scoring
+try:
+    # Import calculate_product_health module
+    import importlib.util
+    calculate_health_path = Path(__file__).parent / "calculate_product_health.py"
+    
+    if calculate_health_path.exists():
+        spec = importlib.util.spec_from_file_location("calculate_product_health", calculate_health_path)
+        calc_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(calc_module)
+        
+        # Call the calculate_product_health function
+        calc_module.calculate_product_health()
+        print("✅ Product health calculated")
+    else:
+        print("ℹ️  Product health calculation script not found, skipping")
+
+except Exception as e:
+    print(f"⚠️  Error calculating product health: {e}")
+    import traceback
+    traceback.print_exc()
