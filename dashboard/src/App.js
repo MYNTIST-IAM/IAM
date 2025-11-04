@@ -10,10 +10,13 @@ import {
   Clock
 } from 'lucide-react';
 import TokenHealthView from './components/TokenHealthView';
+import ProductHealthView from './components/ProductHealthView';
 import './index.css';
 
 function App() {
   const [tokenData, setTokenData] = useState(null);
+  const [productData, setProductData] = useState(null);
+  const [activeTab, setActiveTab] = useState('tokens'); // 'tokens' or 'products'
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -23,15 +26,26 @@ function App() {
       setLoading(true);
       
       // Read the token health data directly from the public folder
-      const response = await fetch('/token_health.json');
-      const data = await response.json();
+      const tokenResponse = await fetch('/token_health.json');
+      const tokenData = await tokenResponse.json();
+      setTokenData(tokenData);
       
-      setTokenData(data);
-      console.log(data)
+      // Read the product health data (pre-calculated from scoring script)
+      try {
+        const productResponse = await fetch('/product_health.json');
+        if (productResponse.ok) {
+          const productData = await productResponse.json();
+          setProductData(productData);
+        }
+      } catch (err) {
+        // Product data is optional - don't fail if it doesn't exist
+        console.log('Product health data not available');
+      }
+      
       setLastUpdated(new Date());
       setError(null);
     } catch (err) {
-      setError('Failed to load token data');
+      setError('Failed to load data');
       console.error('Error:', err);
     } finally {
       setLoading(false);
@@ -179,8 +193,42 @@ function App() {
           </div>
         </div>
 
-        {/* Token Health Details with Sparklines */}
-        <TokenHealthView tokenData={tokenData} />
+        {/* Tabs for Token and Product Views */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+          <div className="border-b border-gray-200">
+            <nav className="flex -mb-px">
+              <button
+                onClick={() => setActiveTab('tokens')}
+                className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
+                  activeTab === 'tokens'
+                    ? 'border-primary-600 text-primary-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Token Health
+              </button>
+              <button
+                onClick={() => setActiveTab('products')}
+                className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
+                  activeTab === 'products'
+                    ? 'border-primary-600 text-primary-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Product Health
+              </button>
+            </nav>
+          </div>
+          
+          <div className="p-6">
+            {activeTab === 'tokens' && (
+              <TokenHealthView tokenData={tokenData} />
+            )}
+            {activeTab === 'products' && (
+              <ProductHealthView productData={productData} />
+            )}
+          </div>
+        </div>
       </main>
 
       {/* Footer */}
