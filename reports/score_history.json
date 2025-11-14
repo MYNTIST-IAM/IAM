@@ -6,10 +6,6 @@
     "status": "Healthy",
     "score_history": [
       {
-        "timestamp": "2025-11-07T02:01:13.711818",
-        "score": 1.0
-      },
-      {
         "timestamp": "2025-11-08T01:55:00.354492",
         "score": 1.0
       },
@@ -32,6 +28,10 @@
       {
         "timestamp": "2025-11-13T02:04:27.204078",
         "score": 1.0
+      },
+      {
+        "timestamp": "2025-11-14T02:02:53.808164",
+        "score": 1.0
       }
     ],
     "repo_access": {
@@ -48,10 +48,6 @@
     "survivability_score": 1.0,
     "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-11-07T02:01:13.711871",
-        "score": 1.0
-      },
       {
         "timestamp": "2025-11-08T01:55:00.354550",
         "score": 1.0
@@ -75,6 +71,10 @@
       {
         "timestamp": "2025-11-13T02:04:27.204112",
         "score": 1.0
+      },
+      {
+        "timestamp": "2025-11-14T02:02:53.808199",
+        "score": 1.0
       }
     ],
     "repo_access": {
@@ -91,10 +91,6 @@
     "survivability_score": 1.0,
     "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2025-11-07T02:01:13.711897",
-        "score": 1.0
-      },
       {
         "timestamp": "2025-11-08T01:55:00.354576",
         "score": 1.0
@@ -117,6 +113,10 @@
       },
       {
         "timestamp": "2025-11-13T02:04:27.204155",
+        "score": 1.0
+      },
+      {
+        "timestamp": "2025-11-14T02:02:53.808222",
         "score": 1.0
       }
     ],
