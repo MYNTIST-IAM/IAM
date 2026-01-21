@@ -6,10 +6,6 @@
     "status": "Healthy",
     "score_history": [
       {
-        "timestamp": "2026-01-14T02:24:43.823952",
-        "score": 1.0
-      },
-      {
         "timestamp": "2026-01-15T02:19:03.266046",
         "score": 1.0
       },
@@ -32,6 +28,10 @@
       {
         "timestamp": "2026-01-20T02:21:16.272921",
         "score": 1.0
+      },
+      {
+        "timestamp": "2026-01-21T02:24:11.288286",
+        "score": 1.0
       }
     ],
     "repo_access": {
@@ -48,10 +48,6 @@
     "survivability_score": 1.0,
     "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2026-01-14T02:24:43.823993",
-        "score": 1.0
-      },
       {
         "timestamp": "2026-01-15T02:19:03.266084",
         "score": 1.0
@@ -75,6 +71,10 @@
       {
         "timestamp": "2026-01-20T02:21:16.272951",
         "score": 1.0
+      },
+      {
+        "timestamp": "2026-01-21T02:24:11.288318",
+        "score": 1.0
       }
     ],
     "repo_access": {
@@ -91,10 +91,6 @@
     "survivability_score": 1.0,
     "status": "Healthy",
     "score_history": [
-      {
-        "timestamp": "2026-01-14T02:24:43.824017",
-        "score": 1.0
-      },
       {
         "timestamp": "2026-01-15T02:19:03.266108",
         "score": 1.0
@@ -117,6 +113,10 @@
       },
       {
         "timestamp": "2026-01-20T02:21:16.272971",
+        "score": 1.0
+      },
+      {
+        "timestamp": "2026-01-21T02:24:11.288341",
         "score": 1.0
       }
     ],
