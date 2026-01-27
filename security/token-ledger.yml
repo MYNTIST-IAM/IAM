@@ -9,13 +9,11 @@ tokens:
   audit_trail:
   - org:MYNTIST-IAM
   - role:admin
-  survivability_score: 0.97
+  survivability_score: 0.96
   entity_type: user
   role: admin
   state: active
   score_history:
-  - timestamp: '2026-01-20T02:21:16.272921'
-    score: 1.0
   - timestamp: '2026-01-21T02:24:11.288286'
     score: 1.0
   - timestamp: '2026-01-22T02:25:25.330756'
@@ -28,7 +26,9 @@ tokens:
     score: 0.98
   - timestamp: '2026-01-26T02:31:28.528667'
     score: 0.97
-  last_scored: '2026-01-26T02:31:28.528673'
+  - timestamp: '2026-01-27T02:27:19.266607'
+    score: 0.96
+  last_scored: '2026-01-27T02:27:19.266612'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -109,8 +109,6 @@ tokens:
   role: member
   state: active
   score_history:
-  - timestamp: '2026-01-20T02:21:16.272951'
-    score: 1.0
   - timestamp: '2026-01-21T02:24:11.288318'
     score: 1.0
   - timestamp: '2026-01-22T02:25:25.330786'
@@ -123,7 +121,9 @@ tokens:
     score: 1.0
   - timestamp: '2026-01-26T02:31:28.528707'
     score: 1.0
-  last_scored: '2026-01-26T02:31:28.528710'
+  - timestamp: '2026-01-27T02:27:19.266644'
+    score: 1.0
+  last_scored: '2026-01-27T02:27:19.266647'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -148,13 +148,11 @@ tokens:
   audit_trail:
   - org:MYNTIST-IAM
   - role:admin
-  survivability_score: 0.97
+  survivability_score: 0.96
   entity_type: user
   role: admin
   state: active
   score_history:
-  - timestamp: '2026-01-20T02:21:16.272971'
-    score: 1.0
   - timestamp: '2026-01-21T02:24:11.288341'
     score: 1.0
   - timestamp: '2026-01-22T02:25:25.330805'
@@ -167,7 +165,9 @@ tokens:
     score: 0.98
   - timestamp: '2026-01-26T02:31:28.528732'
     score: 0.97
-  last_scored: '2026-01-26T02:31:28.528735'
+  - timestamp: '2026-01-27T02:27:19.266668'
+    score: 0.96
+  last_scored: '2026-01-27T02:27:19.266671'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
