@@ -2,13 +2,9 @@
   {
     "token_id": "52085750",
     "owner": "HamzaMasood7",
-    "survivability_score": 0.53,
+    "survivability_score": 0.52,
     "status": "Degrading",
     "score_history": [
-      {
-        "timestamp": "2026-03-05T02:43:49.830357",
-        "score": 0.59
-      },
       {
         "timestamp": "2026-03-06T02:41:16.065101",
         "score": 0.58
@@ -32,6 +28,10 @@
       {
         "timestamp": "2026-03-11T02:39:34.471129",
         "score": 0.53
+      },
+      {
+        "timestamp": "2026-03-12T02:45:18.953802",
+        "score": 0.52
       }
     ],
     "repo_access": {
@@ -45,13 +45,9 @@
   {
     "token_id": "133033842",
     "owner": "hamzaMasood-7",
-    "survivability_score": 0.556,
+    "survivability_score": 0.546,
     "status": "Degrading",
     "score_history": [
-      {
-        "timestamp": "2026-03-05T02:43:49.830396",
-        "score": 0.619
-      },
       {
         "timestamp": "2026-03-06T02:41:16.065136",
         "score": 0.609
@@ -75,6 +71,10 @@
       {
         "timestamp": "2026-03-11T02:39:34.471164",
         "score": 0.556
+      },
+      {
+        "timestamp": "2026-03-12T02:45:18.953835",
+        "score": 0.546
       }
     ],
     "repo_access": {
@@ -88,13 +88,9 @@
   {
     "token_id": "115296346",
     "owner": "Muhammad-Usman-cs",
-    "survivability_score": 0.53,
+    "survivability_score": 0.52,
     "status": "Degrading",
     "score_history": [
-      {
-        "timestamp": "2026-03-05T02:43:49.830421",
-        "score": 0.59
-      },
       {
         "timestamp": "2026-03-06T02:41:16.065159",
         "score": 0.58
@@ -118,6 +114,10 @@
       {
         "timestamp": "2026-03-11T02:39:34.471188",
         "score": 0.53
+      },
+      {
+        "timestamp": "2026-03-12T02:45:18.953859",
+        "score": 0.52
       }
     ],
     "repo_access": {
