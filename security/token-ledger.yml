@@ -9,13 +9,11 @@ tokens:
   audit_trail:
   - org:MYNTIST-IAM
   - role:admin
-  survivability_score: 0.33
+  survivability_score: 0.32
   entity_type: user
   role: admin
   state: active
   score_history:
-  - timestamp: '2026-03-25T02:50:44.982230'
-    score: 0.39
   - timestamp: '2026-03-26T03:15:37.396216'
     score: 0.38
   - timestamp: '2026-03-27T03:18:49.984102'
@@ -28,7 +26,9 @@ tokens:
     score: 0.34
   - timestamp: '2026-03-31T03:17:51.545508'
     score: 0.33
-  last_scored: '2026-03-31T03:17:51.545513'
+  - timestamp: '2026-04-01T03:30:21.262438'
+    score: 0.32
+  last_scored: '2026-04-01T03:30:21.262443'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -104,13 +104,11 @@ tokens:
       state: active
       scope: admin:org, repo, workflow, write:packages
   - role:member
-  survivability_score: 0.346
+  survivability_score: 0.336
   entity_type: user
   role: member
   state: active
   score_history:
-  - timestamp: '2026-03-25T02:50:44.982265'
-    score: 0.409
   - timestamp: '2026-03-26T03:15:37.396255'
     score: 0.399
   - timestamp: '2026-03-27T03:18:49.984137'
@@ -123,7 +121,9 @@ tokens:
     score: 0.357
   - timestamp: '2026-03-31T03:17:51.545548'
     score: 0.346
-  last_scored: '2026-03-31T03:17:51.545551'
+  - timestamp: '2026-04-01T03:30:21.262473'
+    score: 0.336
+  last_scored: '2026-04-01T03:30:21.262476'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -148,13 +148,11 @@ tokens:
   audit_trail:
   - org:MYNTIST-IAM
   - role:admin
-  survivability_score: 0.33
+  survivability_score: 0.32
   entity_type: user
   role: admin
   state: active
   score_history:
-  - timestamp: '2026-03-25T02:50:44.982289'
-    score: 0.39
   - timestamp: '2026-03-26T03:15:37.396279'
     score: 0.38
   - timestamp: '2026-03-27T03:18:49.984161'
@@ -167,7 +165,9 @@ tokens:
     score: 0.34
   - timestamp: '2026-03-31T03:17:51.545573'
     score: 0.33
-  last_scored: '2026-03-31T03:17:51.545576'
+  - timestamp: '2026-04-01T03:30:21.262495'
+    score: 0.32
+  last_scored: '2026-04-01T03:30:21.262497'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
