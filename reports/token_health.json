@@ -6,10 +6,6 @@
     "status": "Degrading",
     "score_history": [
       {
-        "timestamp": "2026-04-13T03:39:27.208871",
-        "score": 0.3
-      },
-      {
         "timestamp": "2026-04-14T03:29:11.060508",
         "score": 0.3
       },
@@ -32,6 +28,10 @@
       {
         "timestamp": "2026-04-19T03:37:35.970331",
         "score": 0.3
+      },
+      {
+        "timestamp": "2026-04-20T03:39:25.873557",
+        "score": 0.3
       }
     ],
     "repo_access": {
@@ -48,10 +48,6 @@
     "survivability_score": 0.315,
     "status": "Degrading",
     "score_history": [
-      {
-        "timestamp": "2026-04-13T03:39:27.208913",
-        "score": 0.315
-      },
       {
         "timestamp": "2026-04-14T03:29:11.060544",
         "score": 0.315
@@ -75,6 +71,10 @@
       {
         "timestamp": "2026-04-19T03:37:35.970366",
         "score": 0.315
+      },
+      {
+        "timestamp": "2026-04-20T03:39:25.873595",
+        "score": 0.315
       }
     ],
     "repo_access": {
@@ -91,10 +91,6 @@
     "survivability_score": 0.3,
     "status": "Degrading",
     "score_history": [
-      {
-        "timestamp": "2026-04-13T03:39:27.208935",
-        "score": 0.3
-      },
       {
         "timestamp": "2026-04-14T03:29:11.060567",
         "score": 0.3
@@ -117,6 +113,10 @@
       },
       {
         "timestamp": "2026-04-19T03:37:35.970390",
+        "score": 0.3
+      },
+      {
+        "timestamp": "2026-04-20T03:39:25.873619",
         "score": 0.3
       }
     ],
