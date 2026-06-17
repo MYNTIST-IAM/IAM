@@ -14,8 +14,6 @@ tokens:
   role: admin
   state: active
   score_history:
-  - timestamp: '2026-06-10T04:23:24.636606'
-    score: 0.3
   - timestamp: '2026-06-11T04:45:41.127156'
     score: 0.3
   - timestamp: '2026-06-12T04:48:23.052135'
@@ -28,7 +26,9 @@ tokens:
     score: 0.3
   - timestamp: '2026-06-16T05:17:46.027225'
     score: 0.3
-  last_scored: '2026-06-16T05:17:46.027229'
+  - timestamp: '2026-06-17T04:57:06.030054'
+    score: 0.3
+  last_scored: '2026-06-17T04:57:06.030059'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -109,8 +109,6 @@ tokens:
   role: member
   state: active
   score_history:
-  - timestamp: '2026-06-10T04:23:24.636638'
-    score: 0.315
   - timestamp: '2026-06-11T04:45:41.127197'
     score: 0.315
   - timestamp: '2026-06-12T04:48:23.052170'
@@ -123,7 +121,9 @@ tokens:
     score: 0.315
   - timestamp: '2026-06-16T05:17:46.027260'
     score: 0.315
-  last_scored: '2026-06-16T05:17:46.027263'
+  - timestamp: '2026-06-17T04:57:06.030089'
+    score: 0.315
+  last_scored: '2026-06-17T04:57:06.030092'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
@@ -153,8 +153,6 @@ tokens:
   role: admin
   state: active
   score_history:
-  - timestamp: '2026-06-10T04:23:24.636658'
-    score: 0.3
   - timestamp: '2026-06-11T04:45:41.127222'
     score: 0.3
   - timestamp: '2026-06-12T04:48:23.052195'
@@ -167,7 +165,9 @@ tokens:
     score: 0.3
   - timestamp: '2026-06-16T05:17:46.027284'
     score: 0.3
-  last_scored: '2026-06-16T05:17:46.027287'
+  - timestamp: '2026-06-17T04:57:06.030114'
+    score: 0.3
+  last_scored: '2026-06-17T04:57:06.030117'
   repository_access:
   - repo_id: 1073211015
     repo_name: IAM
