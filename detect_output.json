@@ -1,6 +1,8 @@
 {
   "manifests": [
-    "ops/autoheal/20251102/133033842.yml"
+    "ops/autoheal/20261003/52085750.yml",
+    "ops/autoheal/20261003/133033842.yml",
+    "ops/autoheal/20261003/115296346.yml"
   ],
-  "count": 1
+  "count": 3
 }
